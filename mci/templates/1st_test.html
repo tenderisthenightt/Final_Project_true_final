@@ -77,10 +77,11 @@
 </head>
 
 <body>
-  <br>
-  <h1 align="center"> <br> 비슷한 그림 그리기 </h1>
+  <a href="/" style="width: 100px;">
+    <br><img src="{{ url_for('static', filename = 'img/logo2.png')}}" alt="Image" style="width: 105px;"></a>
+  <h1 align="center">  비슷한 그림 그리기 </h1>
   <h6>
-    <p style="text-align:center;">nn초동안 그림을 잘 기억한 후 최대한 비슷하게 그려주세요<br>다 그린 후 제출 버튼을 누르고 다음으로 넘어가세요
+    <p style="text-align:center;">10초동안 그림을 잘 기억한 후 최대한 비슷하게 그려주세요<br>다 그린 후 제출 버튼을 누르고 다음으로 넘어가세요
   </h6>
   <div id="image-container">
     <img src="{{ url_for('static', filename = 'face/dongwhan.png')}}" alt="Image">
@@ -90,8 +91,8 @@
   </div>
   <div class='container'>
     <div style="border: px solid; padding :10px; width: 820px; 
-        height: 500px ; border-radius:2em; margin:auto; 
-        padding-top:10px; background-color:#fff ">
+    height: 540px ; border-radius:2em; margin:auto; 
+    padding-top:50px; background-color:#fff ">
       <div>
         <center>
           <img id="image" src={{h_path}} style="display: none;" width=450>

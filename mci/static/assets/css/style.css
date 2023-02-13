@@ -945,8 +945,6 @@ section {
   top: -50%;
   overflow: hidden;
   left: 0;
-  box-shadow: 0 15px 50px 0 rgba(0, 0, 0, 0.3);
-  border-radius: 30px;
 }
 
 @media screen and (max-width: 992px) {

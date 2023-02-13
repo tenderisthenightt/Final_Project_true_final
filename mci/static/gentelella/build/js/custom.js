@@ -697,9 +697,8 @@ if (typeof NProgress != 'undefined') {
 					labels: [
 						"2회 미만",
 						"3-5회",
-						"Other",
-						"Android",
-						"IOS"
+						"6-10회",
+						"10회 이상",
 					],
 					datasets: [{
 						data: [55.5, 34.5, 5.5, 4.5],
