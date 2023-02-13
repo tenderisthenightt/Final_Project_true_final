@@ -1,2 +1,4 @@
 *.pyc
 mci/views/__pycache__
+__pycache__
+logs
