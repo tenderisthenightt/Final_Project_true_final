@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Test Sound</title>
+    <script type="text/javascript" src="../game/6_STT/static/js/6_Recorder.js"></script>
+</head>
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    ul,
+    li {
+        list-style: none;
+    }
+
+    img {
+        border: 0;
+    }
+
+
+    /*---------------------------------------------------*/
+
+    #baijing {
+        width: 500px;
+        height: 165px;
+        background-color: rgb(174, 202, 98);
+
+        position: absolute;
+        /*margin-left: 50px;
+        margin-top: 50pxpx;*/
+
+        justify-content: center;
+    }
+
+    #sound_head {
+        width: 100%;
+        height: 50px;
+        /*background-color: rgb(245, 229, 14);*/
+
+        /*position: absolute;*/
+    }
+
+    .line {
+        margin-bottom: 0px;
+        text-align: center;
+    }
+
+    #contens {
+        width: 100%;
+        height: 110px;
+        margin-top: 20px;
+        /*background-color: rgb(245, 229, 14);*/
+        text-align: center;
+    }
+
+    .qu {
+        /*margin-left: 50px;*/
+        margin-top: 3px;
+        background-color: rgb(223, 223, 223);
+        text-align: center;
+    }
+
+    #result {
+        width: 100%;
+        height: 20px;
+        /*margin-left: 200px;*/
+        margin-top: 3px;
+        background-color: rgb(223, 223, 223);
+        text-align: center;
+    }
+
+    .target_align {
+        margin-left: 30px;
+        font-size: 14px;
+    }
+    .btn{
+        width: 100%;
+        height: 20px;
+        text-align: center;
+    }
+</style>
+
+<body>
+    <div id=baijing>
+        <div id='sound_head'>
+            <audio autoplay></audio>                   <!-- 시작버튼 -->
+            <div class='line'><input class="btn" onclick="startRecording()" type="button" value="시작" /></div>
+            <div class='line'>
+                <form action="http://127.0.0.1:5000/STT" method="post">
+                                                <!-- 멈추기버튼 -->
+                    <input class="btn" onclick="stopRecording()" id='dw' type="submit" value="멈춰" />
+                </form>
+            </div>
+        </div>
+        <div id='contens'>
+            <div class='qu'>
+                <table border=0 class='target_align'>
+                    <input id="code_reddit" type="hidden" value="{{ target }}" autocomplete="off"> 
+                    <button class="btn" onclick="g_gout()">재생</button> <!-- 정답 일거주는 재생버튼 -->
+                    <th>따라하기 : </td>
+                    <td> {{ target }}</td>
+                </table>
+            </div>
+            <div class='qu'>
+                <table border=0 class='target_align'>
+                    <!-- <div class='line'><input onclick="playRecording()" type="button" value="播放" /></div> -->
+                    <th>인식결과 : </td>
+                    <td> {{ sound }}</td>
+                </table>
+            </div>
+            <div id='result'>
+                <p>{{ ck }}</p>
+            </div>
+        </div>
+        <!-- <input onclick="uploadAudio()" type="button" value="提交" /> -->
+        <div id="recordingslist"></div>
+    </div>
+
+
+
+    <script>
+        var count = 0
+
+        // 시작버튼
+        setTimeout(function () { ('#').click(function () { }); }, 5000)
+        var recorder;
+        var audio = document.querySelector('audio');
+        function startRecording() {
+            HZRecorder.get(function (rec) {
+                recorder = rec;
+                recorder.start();
+            }, {
+                sampleBits: 16,
+                sampleRate: 16000
+            });
+        }
+
+        //-------------------------------------------------------------------------------------
+        // 멈추기 버튼
+        function stopRecording() { 
+            //recorder.stop();
+            var blob = recorder.getBlob();
+            var url = URL.createObjectURL(blob);
+            var div = document.createElement('div');
+            var au = document.createElement('audio');
+            var hf = document.createElement('a');
+
+            au.controls = true;
+            au.src = url;
+            hf.href = url;
+
+            count = count + 1
+            hf.download = '정답' + String(count) + '.wav';
+            hf.innerHTML = hf.download;
+            hf.click()
+
+            //hf.click();            // 다운로드 클릭
+            //a = div.appendChild(au);
+            //div.appendChild(hf);
+            recordingslist.appendChild(div);
+        }
+        //-------------------------------------------------------------------------------------            
+        function playRecording() {
+            recorder.play(audio);
+        }
+        function uploadAudio() {
+            recorder.upload("Handler1.ashx", function (state, e) {
+                switch (state) {
+                    case 'uploading':
+                        var percentComplete = Math.round(e.loaded * 100 / e.total) + '%';
+                        break;
+                    case 'ok':
+                        alert(e.target.responseText);
+                        alert("上传成功");
+                        break;
+                    case 'error':
+                        alert("上传失败");
+                        break;
+                    case 'cancel':
+                        alert("上传被取消");
+                        break;
+                }
+            });
+        }
+        //-------------------------------------------------------------------------------------
+        // TTS
+        var voices = [];
+        function setVoiceList() {
+            voices = window.speechSynthesis.getVoices();
+        }
+
+        setVoiceList();
+
+        if (window.speechSynthesis.onvoiceschanged !== undefined) {
+            window.speechSynthesis.onvoiceschanged = setVoiceList;
+        }
+
+        function speech(txt) {
+            if (!window.speechSynthesis) {
+                alert("음성 재생을 지원하지 않는 브라우저입니다. 크롬, 파이어폭스 등의 최신 브라우저를 이용하세요");
+                return;
+            }
+
+            var lang = 'ko-KR';
+            var utterThis = new SpeechSynthesisUtterance(txt);
+
+            utterThis.onend = function (event) {
+                console.log('end');
+            };
+
+            utterThis.onerror = function (event) {
+                console.log('error', event);
+            };
+
+            var voiceFound = false;
+
+            for (var i = 0; i < voices.length; i++) {
+                if (voices[i].lang.indexOf(lang) >= 0 || voices[i].lang.indexOf(lang.replace('-', '_')) >= 0) {
+                    utterThis.voice = voices[i];
+                    voiceFound = true;
+                }
+            }
+            if (!voiceFound) {
+                alert('voice not found');
+                return;
+            }
+
+            utterThis.lang = lang;
+            utterThis.pitch = 1;
+            utterThis.rate = 1; //속도
+
+            window.speechSynthesis.speak(utterThis);
+        }
+
+        function g_gout() {
+            var t = document.getElementById("code_reddit");
+            speech(t.value);
+        }
+    </script>
+</body>
+
+</html>

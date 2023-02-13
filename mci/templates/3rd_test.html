@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=0.1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/favicon-32x32.png') }}" sizes="32x32" />
+  <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/favicon-16x16.png') }}" sizes="16x16" />
+  <title>MCI</title>
+
+  <!--stylesheet-->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,900" rel="stylesheet">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles/styles.css') }}" type="text/css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles/custom-responsive-styles.css') }}" type="text/css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles/huiyacanvars.css') }}" type="text/css">
+
+
+  <style>
+    body {background-image: url(../static/images/back4.JPG);
+      background-repeat: no-repeat;
+      background-size: cover};
+
+    h1 {
+      font-family: 'Times New Roman', Times, serif;
+      padding: 7px;
+    }
+
+    li {
+      font-weight: bolder;
+      list-style: none;
+      font-size: 15px
+    }
+
+    span {
+      font-weight: lighter;
+    }
+  </style>
+</head>
+
+<body>
+    <br>
+    <h3 align="center">제시 단어 그리기 </h3>
+      <h5>
+        <p style="text-align:center;"> 토끼를 그려주세요
+      </h5>
+    <div id="image-container">
+      <img src="{{ url_for('static', filename = 'face/hyebin.png')}}" alt="Image">
+      <div id="speech-bubble">
+        <center><p>올해는<br> 토끼의 해!<br> 알지?</p>
+      </div>
+      <style>
+        #image-container {
+          position: fixed;
+          bottom: 40px;
+          right: 40px;
+        }
+        #image-container img {
+          width: 150px;
+          height: 150px;
+        }
+        #speech-bubble {
+          display: none;
+          position: absolute;
+          bottom: 140px;
+          right: 20px;
+          top: auto;
+          background-color: #fff;
+          padding: 10px;
+          border-radius: 10px;
+          box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        #image-container:hover #speech-bubble {
+          display: block;
+        }
+      </style>
+    </div>
+    <div class='container'>
+        <div style="border: px solid; padding :10px; width: 820px; 
+      height: 500px ; border-radius:2em; margin:auto; 
+      padding-top:10px; background-color:#fff ">
+      <!--이미지 보내기-->
+      
+      <!--그림판--> 
+      <!-- 위의 스타일<div>안에 넣음 -->
+                <center>
+                <canvas id="jsCanvas" class="canvas"></canvas>
+                </center>
+                <!-- 브러쉬 -->
+                <div class="controls">
+                    <div class="controls__range" id="jsRange" value="2.5" >
+                </div>
+                <!-- 팬 색 -->
+                    <div class="controls__color jsColor" style="background-color: #2c2c2c"></div>
+            </div>
+            <center>
+              <div class="controls__btns">
+                  <button id="jsMode" style="display: none;">Fill</button>
+                  <button id="move-btn" type = 'submit' value="move-btn">Save</button>
+                  <button id="jsReset">Reset</button>
+                  <button id="jsSave" style="display: none;">저장</button>
+              </div>
+              </center>
+        </div>
+    </div>
+    
+    <!--그림판 끝-->
+    
+    <script>
+      document.getElementById("move-btn").addEventListener("click", function() {
+          let canvas = document.getElementById("jsCanvas");
+          let dataURL = canvas.toDataURL();
+          let blob = dataURLToBlob(dataURL);
+          let formData = new FormData();
+          formData.append("image", blob, "image.png");
+          let xhr = new XMLHttpRequest();
+          xhr.open("POST", "/predict", true);
+          xhr.send(formData);
+          xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+              window.location.href = "/wrong_img";
+            }
+          };
+      });
+  
+      function dataURLToBlob(dataURL) {
+          let parts = dataURL.split(";base64,");
+          let contentType = parts[0].split(":")[1];
+          let raw = window.atob(parts[1]);
+          let rawLength = raw.length;
+          let uInt8Array = new Uint8Array(rawLength);
+          for (let i = 0; i < rawLength; ++i) {
+              uInt8Array[i] = raw.charCodeAt(i);
+          }
+          return new Blob([uInt8Array], {type: contentType});
+      }
+  </script>
+    
+    </center>
+          <!--그림판 끝-->
+        </div>
+    <h2>
+        <div>
+            <center>
+                <br>
+                <input type="button" value="다음으로 넘어가기" style="
+                width: 180px; height:100; padding-top:12px; padding-bottom:12px;
+                border-radius:15px; cursor : pointer ;  font-size:19px; 
+                font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+                font-weight:bolder;  color:rgb(0, 0, 0); " onClick="location.href='/wrong_img'">
+            </center>
+        </div>
+    </h2>
+    <h3>
+        <form align="center">
+            <center>
+                <div style="border: 2px solid; padding :10px; height: 85px; width: 180px;
+                    padding-top:7px; background-color:rgba(255, 255, 255, 0.455);">
+                    <p style="margin-top:1px;  font-size:26px; "> provided by<br> Team.인절미</p>
+                </div>
+            </center>    
+        </form>  
+    </h3>
+    <br>
+    <br>
+</section>
+<footer class="footer text-center">
+  <div class="container">
+    <ul class="list-inline">
+      <li class="list-inline-item">
+        <a class="social-link rounded-circle text-white mr-3" href="javascript:void(0)">
+            <i class="fa fa-facebook" aria-hidden="true"></i>
+          </a>
+      </li>
+      <li class="list-inline-item">
+        <a class="social-link rounded-circle text-white mr-3" href="javascript:void(0)">
+            <i class="fa fa-twitter" aria-hidden="true"></i>
+          </a>
+      </li>
+      <li class="list-inline-item">
+        <a class="social-link rounded-circle text-white" href="javascript:void(0)">
+            <i class="fa fa-linkedin" aria-hidden="true"></i>
+          </a>
+      </li>
+    </ul>
+    <p class="text-muted small mb-0">Copyright © Your Website 2018</p>
+    <p class="text-muted small mb-0">Designed by <a href="https://www.position2.com/" target="_balnk">Position2</p>
+  </div>
+</footer>
+   <!--scripts-->
+   <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3.2.1.min.js') }}"></script>
+   <script type="text/javascript" src="{{ url_for('static', filename='js/all-plugins.js') }}"></script>
+   <script type="text/javascript" src="{{ url_for('static', filename='js/plugins-activate.js') }}"></script>
+   <script src="{{ url_for('static', filename='js/canvas.js') }}"></script> 
+  </form>
+</body>
+</html>
