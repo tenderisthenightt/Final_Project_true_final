@@ -14,7 +14,7 @@ def create_app():
     app = Flask(__name__)
     app.secret_key=SECRET_KEY
     context = ssl.SSLContext(ssl.PROTOCOL_TLSv1_2)
-    context.load_cert_chain('/etc/letsencrypt/live/bestmci.youtunet.co.kr/fullchain.pem', '/etc/letsencrypt/live/bestmci.youtunet.co.kr/privkey.pem')
+    context.load_cert_chain('fullchain1.pem', 'privkey1.pem')
 
     
 
@@ -32,4 +32,4 @@ def create_app():
 
 if __name__ == '__main__':
     app = create_app()
-    app.run(host='0.0.0.0', port=5000, ssl_context=('/etc/letsencrypt/live/bestmci.youtunet.co.kr/fullchain.pem', '/etc/letsencrypt/live/bestmci.youtunet.co.kr/privkey.pem'))
+    app.run(host='0.0.0.0', port=5000, ssl_context=("fullchain1.pem", 'privkey1.pem'))
