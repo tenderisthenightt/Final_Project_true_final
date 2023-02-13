@@ -4,7 +4,6 @@ import sqlite3 as sql
 import os
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3' #tensorflow warning 끄는 용
 import ssl
-import config
 
 SECRET_KEY = config.SECRET_KEY
 
@@ -13,6 +12,7 @@ SECRET_KEY = config.SECRET_KEY
 def create_app():
     app = Flask(__name__)
     app.secret_key=SECRET_KEY
+    app.config.from_envvar('APP_CONFIG_FILE')
     context = ssl.SSLContext(ssl.PROTOCOL_TLSv1_2)
     context.load_cert_chain('fullchain1.pem', 'privkey1.pem')
 
