@@ -4,6 +4,8 @@ import sqlite3 as sql
 import os
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3' #tensorflow warning 끄는 용
 import ssl
+import warnings
+warnings.simplefilter("ignore", UserWarning)
 
 # SECRET_KEY = config.SECRET_KEY
 
