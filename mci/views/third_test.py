@@ -9,7 +9,7 @@ import sqlite3
 import PIL
 
 # 글그림 모델(yolov5)
-yolo_model = torch.hub.load('ultralytics/yolov5', 'custom', path = 'mci/module/best.pt') #, force_reload =True)
+yolo_model = torch.hub.load('ultralytics/yolov5', 'custom', path = 'mci/module/best.pt', force_reload =True)
 
 @bp.route('/text_to_img')
 def text_to_img():
