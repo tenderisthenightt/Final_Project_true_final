@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, session
+from flask import Blueprint, render_template, session, jsonify
 
 bp = Blueprint('fifth', __name__, url_prefix='/')
 
@@ -62,3 +62,4 @@ def get_screenshot():
     conn.commit()
     cursor.close()
     os.remove(file_name)
+    return jsonify({'file_name':file_name})
