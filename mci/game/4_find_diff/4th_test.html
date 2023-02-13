@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=0.1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <link rel="icon" type="image/png" href="../static/images/favicon-32x32.png" sizes="32x32" />
+        <link rel="icon" type="image/png" href="../static/images/favicon-16x16.png" sizes="16x16" />
+        <title>Travel</title>
+        <!--stylesheet-->
+        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,900" rel="stylesheet">
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link href="../static/styles/styles.css" rel="stylesheet" type="text/css">
+        <link href="../static/styles/custom-responsive-styles.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="../static/styles/huiyacanvars.css" />
+        <!--scripts-->
+        <script src="../game/4_틀린그림찾기/4_java.js"></script>
+        <script type="text/javascript" src="../static/scripts/jquery-3.2.1.min.js"></script>
+        <script type="text/javascript" src="../static/scripts/all-plugins.js"></script>
+        <script type="text/javascript" src="../static/scripts/plugins-activate.js"></script>
+      </head>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>check</title>
+    <style>
+        body {background: linear-gradient(274deg, #4de4cd, #62e2af 44%, #ed77ff)};
+        h1 {font-family: 'Times New Roman', Times, serif; padding: 7px;}
+        li {font-weight: bolder; list-style: none; font-size : 15px}
+        span {font-weight: lighter;}
+    </style>
+</head>
+<body>
+    <br>
+    <h1 align="center"> 틀린그림찾기</h1>
+    <br>
+        <div style="border: px solid; padding :10px; width: 820px; 
+        height: 450px ; border-radius:2em; margin:auto; 
+        padding-top:50px; background-color:rgb(255, 255, 255) ">
+                       <!--모델-->
+                       <form action="{{ url_for('wrong_img') }}" method="POST">
+                       <div class="container4">
+                        <div class="row">
+                            <div class="col-3">
+                                <div class="card" >
+                                    <img class="card-img-top" src = "{{url_for('static', filename = 'game/4_find_diff/4_img/'+img1+'.PNG')}}" alt="image1" >
+                                
+                                    <div class="card-body">
+                                        <button id="button" name="button" class="btn btn-primary" value= '{{img1}}' type="submit">Button 1</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form> 
+                            <div class="col-3">
+                                <div class="card" >
+                                    
+                                    <img class="card-img-top" src="{{url_for('static', filename = 'game/4_find_diff/4_img/'+img2+'.PNG')}}" alt="image2" >
+                                    <div class="card-body">
+                                        <button id="button" name="button" class="btn btn-primary" value= '{{img2}}' type="submit">Button 2</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="card" >
+                                    <img class="card-img-top" src="{{url_for('static', filename = 'game/4_find_diff/4_img/'+img3+'.PNG')}}" alt="image3" >
+                                    
+                                    <div class="card-body">
+                                        <button id="button"name="button" class="btn btn-primary" value= '{{img3}}' type="submit">Button 3</button>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="card" >
+                                    <img class="card-img-top" src="{{url_for('static', filename = 'game/4_find_diff/4_img/'+img4+'.PNG')}}" alt="image4" >
+                                    <div class="card-body">
+                                        
+                                        <button id="button" name="button" class="btn btn-primary" value= '{{img4}}' type="submit">Button 4</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>  
+                    
+                      
+                    <!--모델-->
+      
+        </div>
+    <h2>
+        <div>
+            <center>
+                <br>
+                <input type="button" value="다음으로 넘어가기" style="
+                width: 180px; height:100; padding-top:12px; padding-bottom:12px;
+                border-radius:15px; cursor : pointer ;  font-size:20px; 
+                font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+                font-weight:bolder;  color:rgb(0, 0, 0); "onClick="location.href='5th_test.html'">
+            </center>
+        </div>
+    </h2>
+    <h3>
+        <form align="center">
+            <center>
+                <div style="border: 2px solid; padding :10px; height: 85px; width: 180px;
+                    padding-top:7px; background-color:rgba(255, 255, 255, 0.455);">
+                    <p style="margin-top:1px;"> provided by<br> Team.인절미</p>
+                </div>
+            </center>    
+        </form>  
+    </h3>
+    <br>
+    <br>
+</section>
+<footer class="footer text-center">
+  <div class="container">
+    <ul class="list-inline">
+      <li class="list-inline-item">
+        <a class="social-link rounded-circle text-white mr-3" href="javascript:void(0)">
+            <i class="fa fa-facebook" aria-hidden="true"></i>
+          </a>
+      </li>
+      <li class="list-inline-item">
+        <a class="social-link rounded-circle text-white mr-3" href="javascript:void(0)">
+            <i class="fa fa-twitter" aria-hidden="true"></i>
+          </a>
+      </li>
+      <li class="list-inline-item">
+        <a class="social-link rounded-circle text-white" href="javascript:void(0)">
+            <i class="fa fa-linkedin" aria-hidden="true"></i>
+          </a>
+      </li>
+    </ul>
+    <p class="text-muted small mb-0">Copyright © Your Website 2018</p>
+    <p class="text-muted small mb-0">Designed by <a href="https://www.position2.com/" target="_balnk">Position2</p>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=0.1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/favicon-32x32.png') }}"
+        sizes="32x32" />
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/favicon-16x16.png') }}"
+        sizes="16x16" />
+    <title>MIC</title>
+
+    <!--stylesheet-->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,900" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+        type="text/css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles/styles.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles/custom-responsive-styles.css') }}"
+        type="text/css">
+
+
+    <!--TTS-->
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>MIC</title>
+    <title>MIC</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='6/css/style.css') }}" type="text/css">
+
+    <style>
+        #image-container {
+          position: fixed;
+          bottom: 10px;
+          right: 10px;
+          width: 200px;
+          height: 200px;
+          background: transparent;
+        }
+        #image-container img {
+          width: 150px;
+          height: 150px;
+          cursor: pointer;
+        }
+        #speech-bubble {
+          display: none;
+          position: absolute;
+          bottom: 180px;
+          right: 20px;
+          top: -105px;
+          background-color: #fff;
+          padding: 10px;
+          border-radius: 10px;
+          box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+          z-index: 1;
+        }
+        
+        #image-container:hover #speech-bubble {
+          display: block;
+        }
+      </style>
+ 
+</head>
+
+<body>
+    <br>
+    <h1 align="center"> 문장 따라 말하기 </h1>
+    <h5>
+        <p style="text-align:center;">제시되는 문장을 따라 말하고 제출해주세요</p>
+    </h5>
+    <br>
+    <div id="image-container">
+        <img src="{{ url_for('static', filename = 'face/seungwoo.png')}}" alt="Image">
+        <div id="speech-bubble">
+            <center><p>이제 다했어<br> 조금만 더<br> 화이팅!</p>
+        </div>
+      </div>
+    <div class="container">
+        <div style="border: px solid; padding :10px; width: 820px; 
+        height: 450px ; border-radius:2em; margin : auto;
+        padding-top:50px; background-color:rgb(255, 255, 255) ">
+
+            <div id=baijing>
+                <br><br><br>
+                <div id='contens'>
+                    <div class='qu'>
+                        <input id="code_reddit" type="hidden" value="{{ target }}" autocomplete="off">
+                        <!-- <button class="btn" onclick="g_gout()">재생</button>  -->
+                        <div class='line'></div>
+                        <!-- <table border=0 class='target_align'> -->
+                            <!-- <th>따라하기 : </td> -->
+                            <h3>{{ target }}</h3>
+                        <!-- </table> -->
+                    </div>
+                     <!-- <div class='qu'>
+                        <table border=0 class='target_align'> -->
+                            <!--<div class='line'><input onclick="playRecording()" type="button" value="播放" /></div> -->
+                            <!-- <th>인식결과 : </td>
+                            <td>{{ sound }}</td>
+                        </table>
+                    </div>
+                    <div id='result'>
+                        <td>{{ ck }}</td>
+                    </div> -->
+                </div>
+                <br><br>
+                <div id='sound_head'>
+                    <audio id='jsrecode' autoplay></audio> <!-- 시작버튼 -->
+                    <div class='line'>
+                        <input id='start' class="btn" onclick="startRecording()" type="submit" value="따라말하기" />
+                    </div>
+                    <div class='line'>
+                        <!-- <form action="/STT" method="post"> -->
+                        <!-- 멈추기버튼 -->
+                        <input class="btn" onclick="stopRecording()" id='dw' type="submit" value="제출하기" />
+                        <!-- </form> -->
+                    </div>
+                </div>
+                
+                <!--<input onclick="uploadAudio()" type="button" value="提交" />-->
+                <div id="recordingslist"></div>
+            </div>
+
+
+
+            <script>
+                var count = 0
+
+                // 시작버튼
+                setTimeout(function () { ('#').click(function () { }); }, 5000)
+                var recorder;
+                var audio = document.querySelector('audio');
+                function startRecording() {
+                    HZRecorder.get(function (rec) {
+                        recorder = rec;
+                        recorder.start();
+                    }, {
+                        sampleBits: 16,
+                        sampleRate: 16000
+                    });
+
+                    /*document.getElementById("start").addEventListener("click", function() {
+                        //let canvas = document.getElementById("jsrecode");
+                        let dataURL = recorder.toDataURL();
+                        let blob = dataURLToBlob(dataURL);
+                        let formData = new FormData();
+                        formData.append("recode", blob);
+                        let xhr = new XMLHttpRequest();
+                        xhr.open("POST", "/STT", true);
+                        xhr.send(formData);
+                    });
+                  
+                    function dataURLToBlob(dataURL) {
+                        let parts = dataURL.split(";base64,");
+                        let contentType = parts[0].split(":")[1];
+                        let raw = window.atob(parts[1]);
+                        let rawLength = raw.length;
+                        let uInt8Array = new Uint8Array(rawLength);
+                        for (let i = 0; i < rawLength; ++i) {
+                            uInt8Array[i] = raw.charCodeAt(i);
+                        }
+                        return new Blob([uInt8Array], {type: contentType});
+                    }*/
+                }
+
+                //-------------------------------------------------------------------------------------
+                // 멈추기 버튼
+                function stopRecording(url) {
+                    /*//recorder.stop();
+                    var blob = recorder.getBlob();
+                    var url = URL.createObjectURL(blob);
+                    var div = document.createElement('div');
+                    var au = document.createElement('audio');
+                    var hf = document.createElement('a');
+
+                    au.controls = true;
+                    au.src = url;
+                    hf.href = url;
+
+                    count = count + 1
+                    hf.download = '정답' + String(count) + '.wav';
+                    hf.innerHTML = hf.download;
+                    hf.click()
+
+                    //hf.click();            // 다운로드 클릭
+                    //a = div.appendChild(au);
+                    //div.appendChild(hf);
+                    recordingslist.appendChild(div);*/
+
+
+                    //----------------
+
+                    var blob = recorder.getBlob();
+                    var url = URL.createObjectURL(blob);
+                    var fd = new FormData();
+                    fd.append("recode", blob, 'nefile');
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("POST", "/STT", true);
+                    // xhr.onload = function() {
+                    //     if (xhr.status === 200) {
+                    //     let response = JSON.parse(xhr.responseText);
+                    //     let text = response.text;
+                    //     // Display the extracted text
+                    //     document.getElementById("target").innerHTML = target;
+                    //     document.getElementById("sound").innerHTML = sound;
+                    //     document.getElementById("ck").innerHTML = ck;
+                    //     }
+                    // };
+                    xhr.send(fd);
+                    // xhr.onreadystatechange = function() {
+                    //     if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+                    //         // Request was successful
+                    //         window.location = "/";
+                    //     }
+                    // };
+                    }
+                    
+
+                    // fetch("http://localhost:5000/STT", {
+                    //     method: "POST",
+                    //     body: fd
+                    // })
+                    // .then(response => response.text())
+                    // .then(text => {
+                    //     alert(text);
+                    // });
+                
+                //
+                //-------------------------------------------------------------------------------------            
+                function playRecording() {
+                    recorder.play(audio);
+                }
+                function uploadAudio() {
+                    recorder.upload("Handler1.ashx", function (state, e) {
+                        switch (state) {
+                            case 'uploading':
+                                var percentComplete = Math.round(e.loaded * 100 / e.total) + '%';
+                                break;
+                            case 'ok':
+                                alert(e.target.responseText);
+                                alert("업로드 성공");
+                                break;
+                            case 'error':
+                                alert("업로드 실패");
+                                break;
+                            case 'cancel':
+                                alert("업로드 취소");
+                                break;
+                        }
+                    });
+                }
+                //-------------------------------------------------------------------------------------
+                // TTS
+                var voices = [];
+                function setVoiceList() {
+                    voices = window.speechSynthesis.getVoices();
+                }
+
+                setVoiceList();
+
+                if (window.speechSynthesis.onvoiceschanged !== undefined) {
+                    window.speechSynthesis.onvoiceschanged = setVoiceList;
+                }
+
+                function speech(txt) {
+                    if (!window.speechSynthesis) {
+                        alert("음성 재생을 지원하지 않는 브라우저입니다. 크롬, 파이어폭스 등의 최신 브라우저를 이용하세요");
+                        return;
+                    }
+
+                    var lang = 'ko-KR';
+                    var utterThis = new SpeechSynthesisUtterance(txt);
+
+                    utterThis.onend = function (event) {
+                        console.log('end');
+                    };
+
+                    utterThis.onerror = function (event) {
+                        console.log('error', event);
+                    };
+
+                    var voiceFound = false;
+
+                    for (var i = 0; i < voices.length; i++) {
+                        if (voices[i].lang.indexOf(lang) >= 0 || voices[i].lang.indexOf(lang.replace('-', '_')) >= 0) {
+                            utterThis.voice = voices[i];
+                            voiceFound = true;
+                        }
+                    }
+                    if (!voiceFound) {
+                        alert('voice not found');
+                        return;
+                    }
+
+                    utterThis.lang = lang;
+                    utterThis.pitch = 1;
+                    utterThis.rate = 1; //속도
+
+                    window.speechSynthesis.speak(utterThis);
+                }
+
+                function g_gout() {
+                    var t = document.getElementById("code_reddit");
+                    speech(t.value);
+                }
+            </script>
+        </div>
+        <!--모델-->
+
+    </div>
+    <h2>
+        <div>
+            <center>
+                <br>
+                <input type="button" value="결과보러가기" style="
+                width: 180px; height:100; padding-top:12px; padding-bottom:12px;
+                border-radius:15px; cursor : pointer ;  font-size:19px; 
+                font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+                font-weight:bolder;  color:rgb(0, 0, 0);" onClick="window.location.href='/result'">
+            </center>
+        </div>
+    </h2>
+    <h3>
+        <form align="center">
+            <center>
+                <div style="border: 2px solid; padding :10px; height: 85px; width: 180px;
+                    padding-top:7px; background-color:rgba(255, 255, 255, 0.455);">
+                    <p style="margin-top:1px; font-size:26px;"> provided by<br> Team.인절미</p>
+                </div>
+            </center>
+        </form>
+    </h3>
+    <br>
+    <br>
+    </section>
+    <footer class="footer text-center">
+        <div class="container">
+            <ul class="list-inline">
+                <li class="list-inline-item">
+                    <a class="social-link rounded-circle text-white mr-3" href="javascript:void(0)">
+                        <i class="fa fa-facebook" aria-hidden="true"></i>
+                    </a>
+                </li>
+                <li class="list-inline-item">
+                    <a class="social-link rounded-circle text-white mr-3" href="javascript:void(0)">
+                        <i class="fa fa-twitter" aria-hidden="true"></i>
+                    </a>
+                </li>
+                <li class="list-inline-item">
+                    <a class="social-link rounded-circle text-white" href="javascript:void(0)">
+                        <i class="fa fa-linkedin" aria-hidden="true"></i>
+                    </a>
+                </li>
+            </ul>
+            <p class="text-muted small mb-0">Copyright © Your Website 2018</p>
+            <p class="text-muted small mb-0">Designed by <a href="https://www.position2.com/" target="_balnk">Position2
+            </p>
+        </div>
+    </footer>
+
+    <!--scripts-->
+    <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3.2.1.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/all-plugins.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/plugins-activate.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='6/js/6_Recorder.js') }}"></script>
+
+
+</body>
+
+</html>

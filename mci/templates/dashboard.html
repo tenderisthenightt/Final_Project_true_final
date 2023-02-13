@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>MCI 검사가 모두 끝났습니다! | </title>
+
+    <!-- Bootstrap -->
+    <link href="{{ url_for('static', filename='gentelella/vendors/bootstrap/dist/css/bootstrap.min.css') }}" rel = 'stylesheet'>
+    <!-- Font Awesome -->
+    <link href="{{ url_for('static', filename='gentelella/vendors/font-awesome/css/font-awesome.min.css') }}" rel = 'stylesheet'>
+    <!-- NProgress -->
+    <link href="{{ url_for('static', filename='gentelella/vendors/nprogress/nprogress.css') }}" rel = 'stylesheet'>
+    <!-- iCheck -->
+    <link href="{{ url_for('static', filename='gentelella/vendors/iCheck/skins/flat/green.css') }}" rel = 'stylesheet'>
+	
+    <!-- bootstrap-progressbar -->
+    <link href="{{ url_for('static', filename='gentelella/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css') }}" rel = 'stylesheet'>
+    <!-- JQVMap -->
+    <link href="{{ url_for('static', filename='gentelella/vendors/jqvmap/dist/jqvmap.min.css') }}" rel = 'stylesheet'>
+    <!-- bootstrap-daterangepicker -->
+    <link href="{{ url_for('static', filename='gentelella/vendors/bootstrap-daterangepicker/daterangepicker.css') }}" rel = 'stylesheet'>
+
+    <!-- Custom Theme Style -->
+    <link href="{{ url_for('static', filename='gentelella/build/css/custom.min.css') }}" rel = 'stylesheet'>
+
+    
+    
+   
+</head>
+
+  <body class="nav-md">
+    <div class="container body">
+      <div class="main_container">
+        <div class="col-md-3 left_col">
+          <div class="left_col scroll-view">
+            <div class="navbar nav_title" style="border: 0;">
+                <a href="/" onClick="window.location.href='/'" class="site_title"><i class="fa fa-line-chart "></i> <span> ♪ MCI 검사 결과 </span></a>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <!-- menu profile quick info -->
+            <div class="profile clearfix">
+              <div class="profile_pic">
+                <img src="{{ url_for('static', filename = 'img/student.png')}}" width="90" height="auto">
+              </div>
+              <div class="profile_info">
+                <span>Have a</span>
+                <h2>good day!</h2>
+              </div>
+            </div>
+            <!-- /menu profile quick info -->
+
+            <br/>
+
+            <!-- sidebar menu -->
+            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+              <div class="menu_section">
+                <h3>Menu</h3>
+                <ul class="nav side-menu">
+                    <li><a href="/" onClick="window.location.href='/'"><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a></li>
+                </li>
+                <li><a><i class="fa fa-table"></i> About <span class="fa fa-chevron-down"></span></a>
+                  <ul class="nav child_menu">
+                    <li><a href="/abouttest" onClick="window.location.href='/abouttest'"><i class="fa fa-home"></i> MCI 검사란? <span class="fa fa-chevron-down"></span></a></li>
+                    <li><a href="/aboutus" onClick="window.location.href='/aboutus'"><i class="fa fa-home"></i> 만든 사람들 <span class="fa fa-chevron-down"></span></a></li>
+                  </ul>
+                </li>
+                <li><a><i class="fa fa-desktop"></i> Link fou U <span class="fa fa-chevron-down"></span></a>
+                  <ul class="nav child_menu">
+                    <li><a href="https://www.mentalhealth.go.kr/portal/main/index.do">국가정신건강정보포털</a></li>
+                    <li><a href="https://www.hira.or.kr/">건강보험심사평가원</a></li>
+                    <li><a href="https://www.nid.or.kr/">보건복지부 중앙치매센터</a></li>
+                    <li><a href="https://www.dementia.or.kr/">대한치매학회</a></li>
+                    <li><a href="https://www.bokjiro.go.kr/">복지로</a></li>
+                    <li><a href="https://www.hidoc.co.kr/">하이닥</a></li>
+                  </ul>
+                </li>
+                  </li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+              <div class="menu_section">
+                <h3>Download</h3>
+                <ul class="nav side-menu">
+                  <li><a href="{{ url_for('static', filename='download/brain_training.pdf') }}" download><i class="fa fa-download"></i>중앙치매센터_두근두근 뇌운동</a></li>
+                  <li><a href="{{ url_for('static', filename='download/K-MoCA.pdf') }}" download><i class="fa fa-download"></i>K-MoCA_인지검사지</a></li>
+                  <li><a href="#" onClick="generatePDF();"><i class="fa fa-download"></i> 결과 다운로드<span class="label label-success pull-right">Coming Soon</span></a></li>
+                </ul>
+              </div>
+
+            </div>
+            <!-- /sidebar menu -->
+
+            
+          </div>
+        </div>
+
+        <!-- top navigation -->
+        <div class="top_nav">
+          <div class="nav_menu">
+            <nav>
+              <div class="nav toggle">
+                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+              </div>
+              <!--audio-->
+              <audio controls autoplay
+              src="{{ url_for('static', filename = 'audio/web_board.mp3') }}" 
+              type="audio/mpeg">브라우저가 audio 태그를 지원하지 않을 때 표시되는 문장</audio>
+
+              <ul class="nav navbar-nav navbar-right">
+                <li class="">
+                  <li><a href="/" onClick="window.location.href='/'"><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a></li>
+                  </li>
+                  <ul class="dropdown-menu dropdown-usermenu pull-right">
+                    <li><a href="javascript:;"> Profile</a></li>
+                    <li>
+                      <a href="javascript:;">
+                        <span class="badge bg-red pull-right">50%</span>
+                        <span>Settings</span>
+                      </a>
+                    </li>
+                    <li><a href="javascript:;">Help</a></li>
+                    <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                  </ul>
+                </li>
+
+                <li role="presentation" class="dropdown">
+                  <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
+                    <i class="fa fa-envelope-o"></i>
+                    <span class="badge bg-green">8</span>
+                  </a>
+                  <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
+                    <li>
+                      <a>
+                        <span class="image"><img src="{{ url_for('static', filename = 'face/jiyoung.png')}}" alt="Profile Image" /></span>
+                        <span>
+                          <span>Jiyoung</span>
+                          <span class="time">3 mins ago</span>
+                        </span>
+                        <span class="message">
+                          다른 그림 찾기 또 안돼요? 아.. 어제 분명히 고쳤는데...
+                        </span>
+                      </a>
+                    </li>
+                    <li>
+                      <a>
+                        <span class="image"><img src="{{ url_for('static', filename = 'face/dongwhan.png')}}" alt="Profile Image" /></span>
+                        <span>
+                          <span>Dongwhan</span>
+                          <span class="time">5 mins ago</span>
+                        </span>
+                        <span class="message">
+                          서버작업 다 끝냈습니다 HAHA~(am 3:00)
+                        </span>
+                      </a>
+                    </li>
+                    <li>
+                      <a>
+                        <span class="image"><img src="{{ url_for('static', filename = 'face/dongryul.png')}}" alt="Profile Image" /></span>
+                        <span>
+                          <span>Dongryul</span>
+                          <span class="time">10 mins ago</span>
+                        </span>
+                        <span class="message">
+                          여러분 조금만 더 힘내봅시다! 커피 사러가실 분?
+                        </span>
+                      </a>
+                    </li>
+                    <li>
+                      <a>
+                        <span class="image"><img src="{{ url_for('static', filename = 'face/jieun.png')}}" alt="Profile Image" /></span>
+                        <span>
+                          <span>Jieun</span>
+                          <span class="time">27 mins ago</span>
+                        </span>
+                        <span class="message">
+                          css의 바다에서 표류하는 중...(몰라서 표류중)
+                        </span>
+                      </a>
+                    </li>
+                    <li>
+                        <a>
+                          <span class="image"><img src="{{ url_for('static', filename = 'face/jungeun.png')}}" alt="Profile Image" /></span>
+                          <span>
+                            <span>Jungeun</span>
+                            <span class="time">35 mins ago</span>
+                          </span>
+                          <span class="message">
+                            너희 몸 괜찮아? 나는 예스예스~
+                          </span>
+                        </a>
+                      </li>
+                      <li>
+                        <a>
+                          <span class="image"><img src="{{ url_for('static', filename = 'face/seungwoo.png')}}" alt="Profile Image" /></span>
+                          <span>
+                            <span>seungwoo</span>
+                            <span class="time">2 hrs ago</span>
+                          </span>
+                          <span class="message">
+                            tts 조금만 더 하면 돼
+                          </span>
+                        </a>
+                      </li>
+                      <li>
+                        <a>
+                          <span class="image"><img src="{{ url_for('static', filename = 'face/heehyun.png')}}" alt="Profile Image" /></span>
+                          <span>
+                            <span>Heehyun</span>
+                            <span class="time">3 hrs ago</span>
+                          </span>
+                          <span class="message">
+                            예아ㅏㅏ~~오늘 끝내고 회식기릿! 술!!
+                          </span>
+                        </a>
+                      </li>
+                      <li>
+                        <a>
+                          <span class="image"><img src="{{ url_for('static', filename = 'face/hyebin.png')}}" alt="Profile Image" /></span>
+                          <span>
+                            <span>Hyebin</span>
+                            <span class="time">4 hrs ago</span>
+                          </span>
+                          <span class="message">
+                            여러분 노션 쓰셨나요?!
+                          </span>
+                        </a>
+                      </li>
+                    <li>
+                      <div class="text-center">
+                        <a href="/aboutus" onClick="window.location.href='/aboutus'">
+                          <strong>See All Members</strong>
+                          <i class="fa fa-angle-right"></i>
+                        </a>
+                      </div>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+        <!-- /top navigation -->
+
+        <!-- page content -->
+        <div class="right_col" role="main">
+          <!-- top tiles -->
+          <div class="row tile_count">
+            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+              <span class="count_top"><i class="fa fa-user"></i> 누적 사용자수</span>
+              <div class="count">2500<sup style="font-size: 45%;">명</sup></div>
+              <span class="count_bottom"><i class="green">4% </i> From last Week</span>
+            </div>
+            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+              <span class="count_top"><i class="fa fa-clock-o"></i> 평균 소요시간</span>
+              <div class="count">9.30<sup style="font-size: 45%;">분</sup></div>
+              <span class="count_bottom"><i class="red"><i class="fa fa-sort-desc"></i>12% </i> From last Week</span>
+            </div>
+            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+              <span class="count_top"><i class="fa fa-cogs"></i> 총 개발 시간</span>
+              <div class="count green">2,500<sup style="font-size: 45%;">시간</sup></div>
+              <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span>
+            </div>
+            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+              <span class="count_top"><i class="fa fa-coffee"></i> 커피 섭취량</span>
+              <div class="count">4,567<sup style="font-size: 45%;">잔</sup></div>
+              <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>3% </i> From last Week</span>
+            </div>
+            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+              <span class="count_top"><i class="fa fa-commenting-o"></i> 총 회의 시간</span>
+              <div class="count">2,315<sup style="font-size: 45%;">시간</sup></div>
+              <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span>
+            </div>
+            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+              <span class="count_top"><i class="fa fa-heart"></i> 감사한 마음 총합</span>
+              <div class="count">99,999<sup style="font-size: 45%;">마음</sup></div>
+              <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span>
+            </div>
+          </div>
+          <!-- /top tiles -->
+
+          <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <div class="dashboard_graph">
+                <div class="col-md-9 col-sm-9 col-xs-12">
+                <div class="x_panel tile">
+                    <div class="row">
+                    <div class="col-md-6">
+                      <h3>검사결과 <small>개발진들의 평균점수 대비 당신의 점수</small></h3>
+                    </div>
+                    <div class="col-md-6"  style="text-align: center;">
+                      <div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
+                    </div>
+                  </div>    
+                    <div><img src="{{ url_for('static', filename = 'sample3.png')}}"  width="auto" height="364"></div>
+                  </div>   
+            </div>
+            </div>
+                  <div class="col-md-3 col-sm-3 col-xs-12 bg-white">
+                    <div class="x_panel tile">
+                        <div class="x_title">
+                        <h2>Score</h2>
+                        <ul class="nav navbar-right panel_toolbox"></ul>
+                        <div class="clearfix"></div>
+                      <div>
+                        <p>비슷한 그림 그리기 (총 1 문제)</p>
+                        <div class="">
+                          <div class="progress progress_sm" style="width: 76%;">
+                            <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="50"></div>
+                          </div>
+                        </div>
+                      </div>
+                      <div>
+                        <p>글자 색 맞히기 (총 10 문제)</p>
+                        <div class="">
+                          <div class="progress progress_sm" style="width: 76%;">
+                            <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="60"></div>
+                          </div>
+                        </div>
+                      </div>
+                      <div>
+                        <p>제시 단어 그리기 (총 1 문제)</p>
+                        <div class="">
+                          <div class="progress progress_sm" style="width: 76%;">
+                            <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="40"></div>
+                          </div>
+                        </div>
+                      </div>
+                      <div>
+                        <p>다른 그림 찾기 (총 3 문제)</p>
+                        <div class="">
+                          <div class="progress progress_sm" style="width: 76%;">
+                            <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="50"></div>
+                          </div>
+                        </div>
+                      </div>
+                      <div>
+                        <p>숫자 순서 맞히기 (총 9 문제)</p>
+                        <div class="">
+                          <div class="progress progress_sm" style="width: 76%;">
+                            <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="50"></div>
+                          </div>
+                        </div>
+                      </div>
+                      <div>
+                        <p>문장 따라 말하기 (총 1 문제)</p>
+                        <div class="">
+                          <div class="progress progress_sm" style="width: 76%;">
+                            <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="50"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+
+
+                <div class="clearfix"></div>
+              </div>
+            </div>
+
+          </div>
+          <br />
+
+          <div class="row">
+
+
+            <div class="col-md-4 col-sm-4 col-xs-12">
+              <div class="x_panel tile fixed_height_320">
+                <div class="x_title">
+                  <h2>경도인지장애 진료환자 증가폭 <h5>(단위:명)</h5></h2>
+                  <ul class="nav navbar-right panel_toolbox"></ul>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                  <h5>국민건강보험공단 (2010~2014)</h5>
+                  <div class="widget_summary">
+                    <div class="w_left w_25">
+                      <span>2010</span>
+                    </div>
+                    <div class="w_center w_55">
+                      <div class="progress">
+                        <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 15%;">
+                          <span class="sr-only">60% Complete</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="w_right w_20">
+                      <span><sup style="font-size: 95%;">24,602</sup></span>
+                    </div>
+                    <div class="clearfix"></div>
+                  </div>
+
+                  <div class="widget_summary">
+                    <div class="w_left w_25">
+                      <span>2011</span>
+                    </div>
+                    <div class="w_center w_55">
+                      <div class="progress">
+                        <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 25%;">
+                          <span class="sr-only">60% Complete</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="w_right w_20">
+                      <span><sup style="font-size: 95%;">37,629</sup></span>
+                    </div>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="widget_summary">
+                    <div class="w_left w_25">
+                      <span>2012</span>
+                    </div>
+                    <div class="w_center w_55">
+                      <div class="progress">
+                        <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 45%;">
+                          <span class="sr-only">60% Complete</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="w_right w_20">
+                      <span><sup style="font-size: 95%;">62,888</sup></span>
+                    </div>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="widget_summary">
+                    <div class="w_left w_25">
+                      <span>2013</span>
+                    </div>
+                    <div class="w_center w_55">
+                      <div class="progress">
+                        <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 65%;">
+                          <span class="sr-only">60% Complete</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="w_right w_20">
+                      <span><sup style="font-size: 95%;">87,032</sup></span>
+                    </div>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="widget_summary">
+                    <div class="w_left w_25">
+                      <span>2014</span>
+                    </div>
+                    <div class="w_center w_55">
+                      <div class="progress">
+                        <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 87%;">
+                          <span class="sr-only">60% Complete</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="w_right w_20">
+                      <span><sup style="font-size: 95%;">105,598</sup></span>
+                    </div>
+                    <div class="clearfix"></div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4 col-sm-4 col-xs-12">
+              <div class="x_panel tile fixed_height_320 overflow_hidden">
+                <div class="x_title">
+                  <h2>하루에 기억을 잊어본 경험이 몇번 정도 있나요?</h2>
+                  <ul class="nav navbar-right panel_toolbox">
+                    <li>
+                      <h5>국민 34.5%, "하루 세번 이상 깜빡해"</h5>
+                    </li>
+                  </ul>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                  <table class="" style="width:100%">
+                    <tr>
+                      <th style="width:37%;">
+                        <p></p>
+                      </th>
+                      <th>
+                        <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+                          <p class="">4가지 유형</p>
+                        </div>
+                        <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
+                          <p class="">비율</p>
+                        </div>
+                      </th>
+                    </tr>
+                    <tr>
+                      <td>
+                        <canvas class="canvasDoughnut" height="140" width="140" style="margin: 15px 10px 10px 0"></canvas>
+                      </td>
+                      <td>
+                        <table class="tile_info">
+                          <tr>
+                            <td>
+                              <p><i class="fa fa-square blue"></i>2회 미만 </p>
+                            </td>
+                            <td>55.5%</td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <p><i class="fa fa-square green"></i>3-5회</p>
+                            </td>
+                            <td>34.5%</td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <p><i class="fa fa-square purple"></i>6-10회</p>
+                            </td>
+                            <td>5.5%</td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <p><i class="fa fa-square aero"></i>10회 이상</p>
+                            </td>
+                            <td>4.5%</td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="col-md-4 col-sm-4 col-xs-12">
+              <div class="x_panel tile fixed_height_320">
+                <div class="x_title">
+                  <h2>About 40%</h2>
+                  <ul class="nav navbar-right panel_toolbox">                   
+                    </li></li>                    
+                  </ul>
+                  <div class="clearfix"></div>
+                </div>
+                
+                <div class="x_content">
+                  <div class="dashboard-widget-content">
+                    <ul class="quick-list">
+                      <h2 class="title">
+                        <a>경도인지장애란?</a>
+                      </h2>
+                      <p class="excerpt"><a href="https://www.doctorsnews.co.kr/news/articleView.html?idxno=146176">치매의 전단계인<br> 경도인지장애를 인지하고 있는<br> 비율은 42%에 불과합니다.<br>
+                      MCI과 함께 인지하고<br> 예방하는 계기가 되길 바라며... 
+                      </p>
+                      <div class="byline">
+                        <span>"경도인지장애 잘 모른다" 58%…국민 인식 개선 시급</span> <br>by <a>대한치매학회</a>
+                      </div>
+                    </ul>
+
+                    <div class="sidebar-widget">
+                        <h4>인지장애 얼마나 아시나요?</h4>
+                        <canvas width="150" height="80" id="chart_gauge_01" class="" style="width: 160px; height: 100px;"></canvas>
+                        <div class="goal-wrapper">
+                          <span id="gauge-text" class="gauge-value pull-left">0%</span>
+                          <span class="gauge-value pull-left">%</span>
+                          <span id="goal-text" class="goal-value pull-right">100%</span>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+
+          <div class="row">
+            <div class="col-md-4 col-sm-4 col-xs-12">
+              <div class="x_panel">
+                <div class="x_title">
+                  <h2>읽을거리 <small>news</small></h2>
+                  <ul class="nav navbar-right panel_toolbox">
+                    <li></li>
+                  </ul>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                  <div class="dashboard-widget-content">
+
+                    <ul class="list-unstyled timeline widget">
+                      <li>
+                        <div class="block">
+                          <div class="block_content">
+                            <h2 class="title">
+                              <a>경도인지장애란?</a>
+                            </h2>
+                            <div class="byline">
+                              <span>13 hours ago</span> by <a>국가정신건강서비스포털</a>
+                            </div>
+                            <p class="excerpt">국가정신건강서비스포털 의학정보<br>
+                              경도인지장애가 무엇인지 확실히 알아보자.<a>Read&nbsp;More</a>
+                            </p>
+                          </div>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="block">
+                          <div class="block_content">
+                            <h2 class="title">
+                              <a  href="https://www.sedaily.com/NewsView/22JQ7SEKSR">경도인지장애 <br>
+                                 주3회 운동하면 치매 늦출수 있다</a>
+                            </h2>
+                            <div class="byline">
+                              <span>13 hours ago</span> by <a>서울경제</a>
+                            </div>
+                            <p class="excerpt"><a href="https://www.sedaily.com/NewsView/22JQ7SEKSR">세브란스 조한나·춘천성심 김여진 교수팀, <br> 
+                              주 5회 중강도 또는 3회 고강도 운동 땐 <br> 
+                              인지장애 판정 4년 내 치매 위험 15%↓</a><a>Read&nbsp;More</a>
+                            </p>
+                          </div>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="block">
+                          <div class="block_content">
+                            <h2 class="title">
+                                              <a href="https://www.mk.co.kr/news/it/10347990">기억이 요즘들어 깜빡 깜빡…<br>건망증 vs 경도인지장애 차이점은?</a>
+                                          </h2>
+                            <div class="byline">
+                              <span>13 hours ago</span> by <a>매일경제</a>
+                            </div>
+                            <p class="excerpt"><a href="https://www.mk.co.kr/news/it/10347990">건망증, 수면시간 부족·스트레스·과로로 인한 일시적 현상<br>
+                              경도인지장애, 5~10% 치매 진행…정밀검사·정확한 진단을</a><a>Read&nbsp;More</a>
+                            </p>
+                          </div>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="block">
+                          <div class="block_content">
+                            <h2 class="title">
+                                              <a href="http://www.newsmp.com/news/articleView.html?idxno=141197">경도인지장애 5년새 4.3배↑<br>공단 지급자료 분석...</a>
+                                          </h2>
+                            <div class="byline">
+                              <span>13 hours ago</span> by <a>의약뉴스</a>
+                            </div>
+                            <p class="excerpt"><a href="http://www.newsmp.com/news/articleView.html?idxno=141197">
+                                국민건강보험공단이 2010~2014년 건강보험진료비 지급자료를 분석해 발표한 내용에 따르면 경도인지장애로 인한 건강보험 진료인원이 약 4.3배 늘어났다.
+                            </a><a>Read&nbsp;More</a>
+                            </p>
+                          </div>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="block">
+                          <div class="block_content">
+                            <h2 class="title">
+                                              <a>두근두근 뇌운동</a>
+                                          </h2>
+                            <div class="byline">
+                              <span>13 hours ago</span> by <a>중앙치매센터</a>
+                            </div>
+                            <p class="excerpt">건강한 뇌를 위해, 인지능력 향상을 위해<br>
+                                중앙치매센터의 뇌 운동 자료집!<br><a href="{{ url_for('static', filename='download/brain_training.pdf') }}" download>다운로드</a>
+                            </p>
+                          </div>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="col-md-8 col-sm-8 col-xs-12">
+
+
+
+              <div class="row">
+
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                  <div class="x_panel">
+                    <div class="x_title">
+                      <h2>지역별 경도인지장애 현황 (2020)<small>보건복지부 중앙치매센터 2020</small></h2>
+                      <ul class="nav navbar-right panel_toolbox">
+                        <li></li>
+                      </ul>
+                      <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                      <div class="dashboard-widget-content">
+                        <div class="col-md-4 hidden-small">
+                          <h2 class="line_30">전국 경도인지장애환자수<br>총합은 134,227명입니다</h2>
+
+                          <table class="countries_list">
+                            <tbody>
+                              <tr>
+                                <td>서울특별시</td>
+                                <td class="fs15 fw700 text-right">42.90%</td>
+                              </tr>
+                              <tr>
+                                <td>부산광역시</td>
+                                <td class="fs15 fw700 text-right">6.28%</td>
+                              </tr>
+                              <tr>
+                                <td>대구광역시</td>
+                                <td class="fs15 fw700 text-right">2.71%</td>
+                              </tr>
+                              <tr>
+                                <td>인천광역시</td>
+                                <td class="fs15 fw700 text-right">2.25%</td>
+                              </tr>
+                              <tr>
+                                <td>광주광역시</td>
+                                <td class="fs15 fw700 text-right">1.28%</td>
+                              </tr>
+                              <tr>
+                                <td>대전광역시</td>
+                                <td class="fs15 fw700 text-right">1.66%</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                        <div id="world-map-gdp" class="col-md-8 col-sm-12 col-xs-12" style="height:230px;"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+              <div class="row">
+
+
+                <!-- Start to do list -->
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                  <div class="x_panel">
+                    <div class="x_title">
+                      <h2>To Do List <small>뇌 건강을 위한 생활습관 - 3권 3금 3행 -</small></h2>
+                      <ul class="nav navbar-right panel_toolbox">
+                        <li></li>
+                      </ul>
+                      <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+
+                      <div class="">
+                        <ul class="to_do">
+                          <li>
+                            <p>
+                              <input type="checkbox" class="flat"> 주 5회 중강도 / 주 3회 고강도 운동</p>
+                          </li>
+                          <li>
+                            <p>
+                              <input type="checkbox" class="flat"> 생선과 채소 골고루 챙겨먹기</p>
+                          </li>
+                          <li>
+                            <p>
+                              <input type="checkbox" class="flat"> 독서 및 문화활동 (특히 세밀한 손동작을 사용하는 취미)</p>
+                          </li>
+                          <li>
+                            <p>
+                              <input type="checkbox" class="flat"> 술은 한번에 3잔까지만</p>
+                          </li>
+                          <li>
+                            <p>
+                              <input type="checkbox" class="flat"> 담배끊기</p>
+                          </li>
+                          <li>
+                            <p>
+                              <input type="checkbox" class="flat"> 머리 다치지 않게 조심!</p>
+                          </li>
+                          <li>
+                            <p>
+                              <input type="checkbox" class="flat"> 건강검진 정기적으로 받기 (혈압, 혈당, 콜레스테롤)</p>
+                          </li>
+                          <li>
+                            <p>
+                              <input type="checkbox" class="flat"> 가족, 친구과 자주 연락하고 만나기</p>
+                          </li>
+                          <li>
+                            <p>
+                              <input type="checkbox" class="flat"> 매년 보건소에서 진행하는 무료 치매 조기검진을 받고 관심갖기</p>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- End to do list -->
+                
+   <!-- start of weather widget -->
+   <div class="col-md-6 col-sm-6 col-xs-12">
+    <div class="x_panel">
+      <div class="x_title">
+        <h2>Weather <small>good for walk</small></h2>
+        <ul class="nav navbar-right panel_toolbox">
+          <li></li>
+        </ul>
+        <div class="clearfix"></div>
+      </div>
+      <div class="x_content">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="temperature"><b>Wednesday</b>, 01:00 PM
+              <span>F</span>
+              <span><b>C</b></span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-4">
+            <div class="weather-icon">
+              <canvas height="84" width="84" id="partly-cloudy-day"></canvas>
+            </div>
+          </div>
+          <div class="col-sm-8">
+            <div class="weather-text">
+                <br><h2>Busan <br><i>Partly Cloudy Day</i></h2>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-12">
+          <div class="weather-text pull-right">
+            <h3 class="degrees">6</h3>
+          </div>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <div class="row weather-days">
+          <div class="col-sm-2">
+            <div class="daily-weather">
+              <h2 class="day">Mon</h2>
+              <h3 class="degrees">9</h3>
+              <canvas id="clear-day" width="32" height="32"></canvas>
+              <h5>15 <i>m/s</i></h5>
+            </div>
+          </div>
+          <div class="col-sm-2">
+            <div class="daily-weather">
+              <h2 class="day">Tue</h2>
+              <h3 class="degrees">10</h3>
+              <canvas height="32" width="32" id="rain"></canvas>
+              <h5>3 <i>m/s</i></h5>
+            </div>
+          </div>
+          <div class="col-sm-2">
+            <div class="daily-weather">
+              <h2 class="day">Wed</h2>
+              <h3 class="degrees">6</h3>
+              <canvas height="32" width="32" id="snow"></canvas>
+              <h5>7 <i>m/s</i></h5>
+            </div>
+          </div>
+          <div class="col-sm-2">
+            <div class="daily-weather">
+              <h2 class="day">Thu</h2>
+              <h3 class="degrees">10</h3>
+              <canvas height="32" width="32" id="sleet"></canvas>
+              <h5>15 <i>m/s</i></h5>
+            </div>
+          </div>
+          <div class="col-sm-2">
+            <div class="daily-weather">
+              <h2 class="day">Fri</h2>
+              <h3 class="degrees">12</h3>
+              <canvas height="32" width="32" id="wind"></canvas>
+              <h5>11 <i>m/s</i></h5>
+            </div>
+          </div>
+          <div class="col-sm-2">
+            <div class="daily-weather">
+              <h2 class="day">Sat</h2>
+              <h3 class="degrees">13</h3>
+              <canvas height="32" width="32" id="cloudy"></canvas>
+              <h5>10 <i>m/s</i></h5>
+            </div>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <!-- end of weather widget -->
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /page content -->
+
+        <!-- footer content -->
+        <footer>
+          <div class="pull-right">
+            Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+          </div>
+          <div class="clearfix"></div>
+        </footer>
+        <!-- /footer content -->
+      </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+    <!-- jQuery -->
+    <script type="text/javascript" src="{{ url_for('static', filename = 'gentelella/vendors/jquery/dist/jquery.min.js') }}"></script>
+    <!-- Bootstrap -->
+    <script type="text/javascript" src="{{ url_for('static', filename = 'gentelella/vendors/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+    <!-- FastClick -->
+    <script type="text/javascript" src="{{ url_for('static', filename = 'gentelella/vendors/fastclick/lib/fastclick.js') }}"></script>
+    <!-- NProgress -->
+    <script type="text/javascript" src="{{ url_for('static', filename = 'gentelella/vendors/nprogress/nprogress.js') }}"></script>
+    <!-- Chart.js -->
+    <script type="text/javascript" src="{{ url_for('static', filename = 'gentelella/vendors/Chart.js/dist/Chart.min.js') }}"></script>
+    <!-- gauge.js -->
+    <script type="text/javascript" src="{{ url_for('static', filename = 'gentelella/vendors/gauge.js/dist/gauge.min.js') }}"></script>
+    <!-- bootstrap-progressbar -->
+    <script type="text/javascript" src="{{ url_for('static', filename = 'gentelella/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js') }}"></script>
+    <!-- iCheck -->
+    <script type="text/javascript" src="{{ url_for('static', filename = 'gentelella/vendors/iCheck/icheck.min.js') }}"></script>
+    <!-- Skycons -->
+    <script type="text/javascript" src="{{ url_for('static', filename = 'gentelella/vendors/skycons/skycons.js') }}"></script>
+    <!-- Flot -->
+    <script type="text/javascript" src="{{ url_for('static', filename = 'gentelella/vendors/Flot/jquery.flot.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename = 'gentelella/vendors/Flot/jquery.flot.pie.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename = 'gentelella/vendors/Flot/jquery.flot.time.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename = 'gentelella/vendors/Flot/jquery.flot.stack.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename = 'gentelella/vendors/Flot/jquery.flot.resize.js') }}"></script>
+
+    <!-- Flot plugins -->
+    <script type="text/javascript" src="{{ url_for('static', filename = 'gentelella/vendors/flot.orderbars/js/jquery.flot.orderBars.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename = 'gentelella/vendors/flot-spline/js/jquery.flot.spline.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename = 'gentelella/vendors/flot.curvedlines/curvedLines.js') }}"></script>
+    <!-- DateJS -->
+    <script type="text/javascript" src="{{ url_for('static', filename = 'gentelella/vendors/DateJS/build/date.js') }}"></script>
+    <!-- JQVMap -->
+    <script type="text/javascript" src="{{ url_for('static', filename = 'gentelella/vendors/jqvmap/dist/jquery.vmap.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename = 'gentelella/vendors/jqvmap/dist/maps/jquery.vmap.world.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename = 'gentelella/vendors/jqvmap/examples/js/jquery.vmap.sampledata.js') }}"></script>
+    <!-- bootstrap-daterangepicker -->
+    <script type="text/javascript" src="{{ url_for('static', filename = 'gentelella/vendors/moment/min/moment.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename = 'gentelella/vendors/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
+
+    <!-- Custom Theme Scripts -->
+    <script type="text/javascript" src="{{ url_for('static', filename = 'gentelella/build/js/custom.min.js') }}"></script>
+	
+  </body>
+</html>

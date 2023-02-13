@@ -1,0 +1,12 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "정은)flaskver",
+		"liveServer.settings.port": 5501,
+		"code-runner.ignoreSelection": true
+	}
+}

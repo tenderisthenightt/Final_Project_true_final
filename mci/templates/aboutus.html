@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>SoftLand Bootstrap Template - Index</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="{{ url_for('static', filename='static/images/favicon.ico') }}" rel="icon">
+  <link href="{{ url_for('static', filename='img/apple-touch-icon.png') }}" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+    rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{{ url_for('static', filename='assets/vendor/aos/aos.css') }}" rel = 'stylesheet'>
+  <link href="{{ url_for('static', filename='assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel = 'stylesheet'>
+  <link href="{{ url_for('static', filename='assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel = 'stylesheet'>
+  <link href="{{ url_for('static', filename='assets/vendor/boxicons/css/boxicons.min.css') }}" rel = 'stylesheet'>
+  <link href="{{ url_for('static', filename='assets/vendor/swiper/swiper-bundle.min.css') }}" rel = 'stylesheet'>
+  <link href="{{ url_for('static', filename='css/styles/custom-responsive-styles.css') }}" rel = 'stylesheet'>
+
+  <!-- Template Main CSS File -->
+  <link href="{{ url_for('static', filename='assets/css/style.css') }}" rel = 'stylesheet'>
+
+  <!--stylesheet-->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,900" rel="stylesheet">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+  <!-- =======================================================
+  * Template Name: SoftLand - v4.10.0
+  * Template URL: https://bootstrapmade.com/softland-bootstrap-app-landing-page-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body>
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top d-flex align-items-center">
+    <div class="container d-flex justify-content-between align-items-center">
+      <a href="/" style="width: 100px;">
+        <img src="{{ url_for('static', filename = 'img/logo.png')}}" alt="Image" style="width: 100%;">
+      </a>
+      <h1 style="color: white; margin-left: 10px;">MCI</h1>
+      </a>
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a class="active" href="/">Home</a></li>
+          <li><a href="/intro">Test</a></li>
+          <li class="dropdown"><a href="#">About <i class="bi bi-chevron-down"></i></a>
+            <ul>
+              <li><a href="/abouttest">About test</a></li>
+              <li><a href="/aboutus">About us</a></li>
+            </ul>
+          </li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+      </div>
+    </div>
+  </header><!-- End Header -->
+
+  <!-- ======= Hero Section ======= -->
+  <section class="hero-section" id="hero">
+
+    <div class="wave">
+
+      <svg width="100%" height="355px" viewBox="0 0 1920 355" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+          <g id="Apple-TV" transform="translate(0.000000, -402.000000)" fill="#FFFFFF">
+            <path d="M0,439.134243 C175.04074,464.89273 327.944386,477.771974 458.710937,477.771974 C654.860765,477.771974 870.645295,442.632362 1205.9828,410.192501 C1429.54114,388.565926 1667.54687,411.092417 1920,477.771974 L1920,757 L1017.15166,757 L0,757 L0,439.134243 Z" id="Path"></path>
+          </g>
+        </g>
+      </svg>
+
+    </div>
+
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-12 hero-text-image">
+          <div class="row">
+            <div class="col-lg-8 text-center text-lg-start">
+              <h1 data-aos="fade-right">인절미가 누구 ?<br>
+                Who is Injeolmi ?</h1>
+              <p class="mb-5" data-aos="fade-right" data-aos-delay="100">MCI 프로그램을 개발한<br>
+                8명의 개발자들을<br>
+                소개합니다</p>
+              <p data-aos="fade-right" data-aos-delay="200" data-aos-offset="-500"><a href="#main" class="btn btn-xl smooth-scroll btn-outline-white">Let's Go</a></p>
+            </div>
+            <div class="col-md-6" data-aos="fade-left">
+              <img src="{{ url_for('static', filename = 'assets/img/undraw_svg_2.svg')}}" alt="Image" class="img-fluid resized-svg" style="width: 200px; height: 200px; float: left;">
+            </div>
+            
+        </div>
+      </div>
+    </div>
+
+  </section><!-- End Hero -->
+
+  <main id="main">
+
+    <!-- ======= Home Section ======= -->
+    <section class="section">
+      <div class="container">
+        <div class="row justify-content-center text-center mb-5">
+          <div class="col-md-6" data-aos="fade-up">
+            <h3 class="section-heading">팀원 소개 및<br>우리의 발자취</h3>
+          </div>
+        </div>
+    <section class="section">
+      <div class="container">
+        <div class="row align-items-center">
+          <style>
+            .img-fluid {
+              max-width: 1500px;
+              max-height: auto;
+              object-fit: cover;
+            }
+            </style>
+          <div class="col-md-12">
+            <center>
+              <img src="{{ url_for('static', filename = 'images/member2.jpg')}}" alt="Image"  class="img-fluid">
+              <img src="{{ url_for('static', filename = 'images/member3.JPG')}}" alt="Image" class="img-fluid">
+            </center>
+          </div>
+          <div>
+          <hr style="background-color: gray; height: 1px; border: none;"></div>
+          <div>
+            <center>
+              <img src="{{ url_for('static', filename = 'images/member1.jpg')}}" alt="Image" class="img-fluid">
+            </center>
+        </div>
+      </div>
+    </section>
+    </section>
+
+   
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="col-md-12">
+        <center>
+          <img src="{{ url_for('static', filename = 'img/lighthouse.gif')}}" 
+          alt="Image" style="width: auto; height: 400px; -webkit-box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5); -moz-box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5); box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5); style="margin-bottom: 0;"">
+        </center>
+      </div>
+          <center>
+            <br><br><br>
+          <p>우리는 나날이 증가하는 사람들의 건망증에 대한 걱정으로 시작되었습니다.<br>
+          휴대폰과 컴퓨터와 같은 뛰어난 저장매체에 의해 장기 기억의 중요성을 잃은 요즘, <br>
+          시기적절한 예방과 건강한 두뇌활동으로 여러분의 삶의 등대가 되길 바랍니다.</p>
+                         <h3>From 인절미 team</h3><br>
+            <hr style="background-color: gray; height: 1px; border: none;">
+          </div>
+        </div>
+      </div>
+      <div class="row justify-content-center text-center">
+        <div class="col-md-7">
+          <p class="copyright">&copy; Copyright SoftLand. All Rights Reserved</p>
+          <div class="credits">
+            <!--
+            All the links in the footer should remain intact.
+            You can delete the links only if you purchased the pro version.
+            Licensing information: https://bootstrapmade.com/license/
+            Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=SoftLand
+          -->
+            Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+<!-- Vendor JS Files -->
+<script src="{{ url_for('static', filename='assets/vendor/aos/aos.js') }}"></script>
+<script src="{{ url_for('static', filename='assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ url_for('static', filename='assets/vendor/swiper/swiper-bundle.min.js') }}"></script>
+<script src="{{ url_for('static', filename='assets/vendor/php-email-form/validate.js') }}"></script>
+
+<!-- Template Main JS File -->
+<script src="{{ url_for('static', filename='assets/js/main.js') }}"></script>
+
+</body>
+
+</html>
