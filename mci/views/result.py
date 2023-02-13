@@ -1,13 +1,14 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, session
 import numpy as np
 from scipy.interpolate import interp1d
 import matplotlib.pyplot as plt 
+import sqlite3
 
 bp = Blueprint('result', __name__, url_prefix='/')
 
 @bp.route('/result')
 def result():
-    import sqlite3
+    guest = str(session['guest'])
     conn = sqlite3.connect('ijm.db', isolation_level=None)
     # 커서
     c = conn.cursor()
@@ -15,7 +16,7 @@ def result():
     sql = []
     for i in range(len(a)):
         print(i)
-        c.execute("SELECT * FROM "+a[i])
+        c.execute("SELECT * FROM "+ a[i] + " WHERE session = '{}'".format(guest))
         db =c.fetchone()
         sql.append(db)
         print(db)
@@ -31,27 +32,27 @@ def result():
     if sql[0][3] == 0:
         sim_point = 0
     else : sim_point = 10
+    
+    
     # 2 stroop_point
     ##방법1. for 사용해서 점수 더하기
     stroop_point = 0
-    index = range(2,10) # 아직 문제를 8개 할지 10개 할지 안 정해서 인덱스로 갖고옴. 나중에 10로 확정되면  for i in range(2,12) 로 바꾸면 될듯
+    index = range(2,12) # 아직 문제를 8개 할지 10개 할지 안 정해서 인덱스로 갖고옴. 나중에 10로 확정되면  for i in range(2,12) 로 바꾸면 될듯
     for i in index:
         if sql[1][i]== 1 :
             stroop_point += 1
         elif sql[1][i]== 0:
             stroop_point +=0
-    if stroop_point == 8: # 2점 더 주기(문제가 8개라서.. 만약 10개로 늘어나면 삭제하기)
-        stroop_point = 10
 
     ## 방법2. 모든 컬럼을 하나의 list 에 담기 - stroop_point = len(list()) 
-    index = range(2,10)
-    stroop_list =[]
-    for i in index :
-        stroop_list.append(sql[1][i])
-    stroop_point = stroop_list.count('정답')
+    # index = range(2,10)
+    # stroop_list =[]
+    # for i in index :
+    #     stroop_list.append(sql[1][i])
+    # stroop_point = stroop_list.count('정답')
 
-    if stroop_point == 8: # 2점 더 주기(문제가 8개라서.. 만약 10개로 늘어나면 삭제하기)
-        stroop_point = 10
+    # if stroop_point == 8: # 2점 더 주기(문제가 8개라서.. 만약 10개로 늘어나면 삭제하기)
+    #     stroop_point = 10
 
     #3 write_point
     write_point =str(sql[2][2])[2]# 점수를 str 으로 바꿔서 슬라이싱 해서 갖고 오기
@@ -106,10 +107,10 @@ def result():
     xs=np.linspace(1,6,500)
     ys=cubic_interploation_model1(xs) + 1
     zs=cubic_interploation_model2(xs) + 1
-    fig = plt.figure(figsize=(21, 7))
+    fig = plt.figure(figsize=(21, 6))
     ax = fig.add_subplot(1, 1, 1)
-    ax.plot(xs, ys, color = '#5a918a', linewidth=0.7, label = '평균')
-    ax.plot(xs, zs, color = '#3dd7ca', linewidth=0.7, label = '내점수')
+    ax.plot(xs, ys, color = '#3dd7ca', linewidth=0.7, label = '평균')
+    ax.plot(xs, zs, color = '#5a918a', linewidth=0.7, label = '내점수')
     ax.set_xticks([1, 2, 3, 4, 5, 6])
     ax.set_yticks([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11])
     ax.set_xticklabels(['비슷한 그림 \n그리기', '글자 색 \n맞히기', '제시 단어 \n그리기', '다른 그림 찾기', '숫자 순서 \n맞히기', '문장 따라 \n말하기'], 
@@ -123,8 +124,8 @@ def result():
     plt.ylim(0, 13)
     plt.legend(fontsize=15)
 
-    plt.savefig(f'./mci/static/dashboard/dashboard.jpg', dpi=600)
+    plt.savefig(f'./mci/static/dashboard/{guest}.jpg', dpi=400)
     
     sim_point, stroop_point, write_point, wrong_point, remember_point, stt_point = z * 10
     return render_template('dashboard.html', sim_point = sim_point, stroop_point = stroop_point, write_point = write_point,
-                            wrong_point = wrong_point, remember_point = remember_point, stt_point = stt_point)    
+                            wrong_point = wrong_point, remember_point = remember_point, stt_point = stt_point, guest=guest)    

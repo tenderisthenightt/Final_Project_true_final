@@ -18,7 +18,6 @@ def text_to_img():
 
 @bp.route("/predict", methods=["GET", "POST"])
 def predict():
-    print('1111111111111111')
     # 이미지 받기(blob)
     if request.method == 'POST':
         image = request.files["image"]
@@ -32,7 +31,6 @@ def predict():
     # with open("image.png", "wb") as f:
     #     f.write(image)
     
-    print('22222222222222')
     
     # e=open('Base64_dec.png','wb') 
     # e.write(image_binary)
@@ -44,9 +42,7 @@ def predict():
     # Model(YOLOv5 종속 항목 설치)
 
     # Image
-    print('asdadasdasdasdas')
     img = PIL.Image.open(img_path)
-    print('ㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㅁㄴㅇㅁㄴㅇㅁㄴㅇ')
     ########## 이 사진을 어떻게 가지고 올지에 대해서 알아봐야한다. !!
     global yolo_model
     # 추론
@@ -68,7 +64,6 @@ def predict():
         OX.append(1)
     else:
         OX.append(0)
-    print(OX)
     
 
     # DB 생성 / 이미 있으면 나중에 주석처리하기.

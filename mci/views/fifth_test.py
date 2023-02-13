@@ -19,14 +19,14 @@ def get_screenshot():
     def get_score(level) :
         if level == 1:
             score = 0
-        elif level == 2:
-            score = 1
-        elif 3 <= level <= 4:
-            score = 2
-        elif level == 5:
+        elif 2<= level <= 3:
             score = 3
+        elif 4 <= level <= 5:
+            score = 6
+        elif 6 <= level <= 7:
+            score = 8
         else:
-            score = 4
+            score = 10
             
         return level, score
 
@@ -45,10 +45,7 @@ def get_screenshot():
             if res[1][0:10] == 'Your level':
                 level = res[1][-1]
                 result = get_score(int(level))
-            else:
-                level=1
-                result=0
-    
+                
     # 텍스트로 추출한 결과를 DB에 저장
     conn = sqlite3.connect('ijm.db', isolation_level=None)
     cursor = conn.cursor()
@@ -58,7 +55,7 @@ def get_screenshot():
         level integer,
         score integer)""")
     cursor.execute("""INSERT INTO Memory_Test(session, game, level, score) 
-                    VALUES(?, ?, ?, ?)""", (guest, game, level, result))
+                    VALUES(?, ?, ?, ?)""", (guest, game, result[0], result[1]))
     conn.commit()
     cursor.close()
     os.remove(file_name)
