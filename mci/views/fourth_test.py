@@ -13,6 +13,7 @@ def find_diff():
 #global 변수
 wrong_image_count = 0
 test_class = ['나비','지렁이','컴퓨터']
+test_key = ''
 # 밑에 next를 안 넣고 count>=3 을 하면 오류남 (인덱스 에러)/ 왜인진 모르겠지만 맨 마지막 인덱스는 안 나온다.-># 해결 
 wrong_ox = list() #db 저장용 
 # html 렌더링
@@ -20,14 +21,21 @@ wrong_ox = list() #db 저장용
 def wrong_img():
     # OX list에 결과값 저장
     global wrong_ox
+    global wrong_image_count
+    global test_key
+    global test_class
     if request.method == 'POST':
         image = str(request.form['button'])
         if 'X' in image:
             wrong_ox.append(1)
         else: wrong_ox.append(0)
     # 이미지 불러오기
-    global wrong_image_count
-    global test_class
+    if len(wrong_ox) != wrong_image_count:
+        if len(wrong_ox) > 0:
+            test_class.append(test_key)
+        else:
+            test_class = ['나비','지렁이','컴퓨터']
+            wrong_image_count = len(wrong_ox)
     if len(test_class) == 0:
         test_class.append('나비')
         test_class.append('지렁이')
@@ -39,6 +47,7 @@ def wrong_img():
     else:
         # 변수에 이미지 이름 넣기
         random.shuffle(test_class)
+        test_key = test_class[0]
         img1 =test_class[0] + '1'
         img2=test_class[0] + '2'
         img3= test_class[0] + '3'

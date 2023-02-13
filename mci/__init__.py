@@ -13,6 +13,9 @@ SECRET_KEY = config.SECRET_KEY
 def create_app():
     app = Flask(__name__)
     app.secret_key=SECRET_KEY
+    context = ssl.SSLContext(ssl.PROTOCOL_TLSv1_2)
+    context.load_cert_chain('/etc/letsencrypt/live/bestmci.youtunet.co.kr/fullchain.pem', '/etc/letsencrypt/live/bestmci.youtunet.co.kr/privkey.pem')
+
     
 
     from .views import main_views, first_test, second_test, third_test, fourth_test, fifth_test, sixth_test, result
@@ -26,3 +29,7 @@ def create_app():
     app.register_blueprint(result.bp)
 
     return app
+
+if __name__ == '__main__':
+    app = create_app()
+    app.run(host='0.0.0.0', port=5000, ssl_context=('/etc/letsencrypt/live/bestmci.youtunet.co.kr/fullchain.pem', '/etc/letsencrypt/live/bestmci.youtunet.co.kr/privkey.pem'))
