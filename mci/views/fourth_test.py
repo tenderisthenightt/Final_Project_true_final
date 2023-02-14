@@ -10,25 +10,29 @@ import random
 def find_diff():
     return render_template('4th_test.html')
 
+
 #global 변수
-wrong_image_count = 0
-test_class = ['나비','지렁이','컴퓨터']
-test_key = ''
-# 밑에 next를 안 넣고 count>=3 을 하면 오류남 (인덱스 에러)/ 왜인진 모르겠지만 맨 마지막 인덱스는 안 나온다.-># 해결 
-wrong_ox = list() #db 저장용 
+# wrong_image_count = 0
+# test_class = ['나비','지렁이','컴퓨터']
+# test_key = ''
+# # 밑에 next를 안 넣고 count>=3 을 하면 오류남 (인덱스 에러)/ 왜인진 모르겠지만 맨 마지막 인덱스는 안 나온다.-># 해결 
+# wrong_ox = list() #db 저장용 
 # html 렌더링
 @bp.route('/wrong_img',  methods=['POST','GET'])
 def wrong_img():
     # OX list에 결과값 저장
-    global wrong_ox
-    global wrong_image_count
-    global test_key
-    global test_class
+    wrong_ox = session['wrong_ox']
+    wrong_image_count = session['wrong_image_count']
+    test_key = session['test_key']
+    test_class = session['test_class']
+
     if request.method == 'POST':
         image = str(request.form['button'])
         if 'X' in image:
             wrong_ox.append(1)
         else: wrong_ox.append(0)
+    print(len(wrong_ox))
+    print(wrong_image_count)
     # 이미지 불러오기
     if len(wrong_ox) != wrong_image_count:
         if len(wrong_ox) > 0:
@@ -36,18 +40,19 @@ def wrong_img():
         else:
             test_class = ['나비','지렁이','컴퓨터']
             wrong_image_count = len(wrong_ox)
-    if len(test_class) == 0:
-        test_class.append('나비')
-        test_class.append('지렁이')
-        test_class.append('컴퓨터')
+    session['wrong_ox'] = wrong_ox
+    # if len(test_class) == 0:
+    #     test_class.append('나비')
+    #     test_class.append('지렁이')
+    #     test_class.append('컴퓨터')
     if wrong_image_count >=3 :
-        wrong_image_count = 0 # 전역변수 횟수 0으로 바꿔주기
+        session['wrong_image_count'] = 0 # 전역변수 횟수 0으로 바꿔주기
         return redirect(url_for('fourth.end')) # redirect를 할때는 route 옆에 오는 글자를 넣어줘야함(함수이름이 아님) 
     
     else:
         # 변수에 이미지 이름 넣기
         random.shuffle(test_class)
-        test_key = test_class[0]
+        session['test_key'] = test_class[0]
         img1 =test_class[0] + '1'
         img2=test_class[0] + '2'
         img3= test_class[0] + '3'
@@ -77,6 +82,7 @@ def wrong_img():
         
         test_class.remove(test_class[0]) #  사용한 str 은 삭제해서 test_class 가 중복이 안되게 함.
         wrong_image_count += 1
+        session['wrong_image_count'] = wrong_image_count
         return render_template('4th_test.html',img1 = img1, img2=img2,img3=img3,img4=img4) 
    
 
@@ -98,6 +104,7 @@ def end():
     
     # db 에 정보 저장
     game = 'Wrong_Image'
+    wrong_ox = session['wrong_ox']
     OX1 = wrong_ox[0]
     OX2 = wrong_ox[1]
     OX3 = wrong_ox[2]
