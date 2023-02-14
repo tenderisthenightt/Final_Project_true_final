@@ -124,7 +124,7 @@ def result():
     plt.ylim(0, 13)
     plt.legend(fontsize=15)
 
-    plt.savefig(f'./mci/static/dashboard/{guest}.jpg', dpi=500)
+    plt.savefig(f'./mci/static/dashboard/{guest}.png', dpi=500)
     
     sim_point, stroop_point, write_point, wrong_point, remember_point, stt_point = z * 10
     return render_template('dashboard.html', sim_point = sim_point, stroop_point = stroop_point, write_point = write_point,
