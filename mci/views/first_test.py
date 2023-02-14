@@ -16,14 +16,7 @@ vgg_model = kapp.VGG16(weights='imagenet', include_top=False)
 model = kmodels.Model(inputs=vgg_model.input, outputs=vgg_model.get_layer('block5_pool').output)
 anch = ''
 
-def get_image_feature(image):
-    img = utils.load_img(image, target_size=(224, 224))
-    img = utils.img_to_array(img)
-    img = np.expand_dims(img, axis=0)
-    img = kapp.vgg16.preprocess_input(img)
-    features = model.predict(img)
-    features = features.flatten()
-    return features
+
 
 @bp.route("/vgg")
 def similarity_image():
@@ -54,6 +47,15 @@ def image_similarity():
 
     print('333333333333333')
     
+
+    def get_image_feature(image):
+        img = utils.load_img(image, target_size=(224, 224))
+        img = utils.img_to_array(img)
+        img = np.expand_dims(img, axis=0)
+        img = kapp.vgg16.preprocess_input(img)
+        features = model.predict(img)
+        features = features.flatten()
+        return features
 
     features1 = get_image_feature(p_path)
     features2 = get_image_feature(img_path)
