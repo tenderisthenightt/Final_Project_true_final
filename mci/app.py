@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, session
 from werkzeug.utils import secure_filename
 import sqlite3 as sql
 import os
@@ -31,8 +31,11 @@ def create_app():
     app.register_blueprint(result.bp)
 
     return app
+# if session['start'] is None:
 
 app = create_app()
+
+
 
 if __name__ == '__main__':
   
