@@ -68,7 +68,7 @@ def get_screenshot():
         level integer,
         score integer)""")
     cursor.execute("""INSERT INTO Memory_Test(session, game, level, score) 
-                    VALUES(?, ?, ?, ?)""", (guest, game, level, result))
+                    VALUES(?, ?, ?, ?)""", (guest, game, result[0], result[1]))
     conn.commit()
     cursor.close()
     os.remove(file_name)
