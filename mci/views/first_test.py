@@ -46,7 +46,7 @@ def image_similarity():
 
 
     print('333333333333333')
-    
+    global model
 
     def get_image_feature(image):
         img = utils.load_img(image, target_size=(224, 224))
