@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, session, jsonify,request
+from flask import Blueprint, render_template, session, url_for, request, redirect
 import random
 
 bp = Blueprint('fifth', __name__, url_prefix='/')
@@ -81,4 +81,4 @@ def get_screenshot():
     try:
         os.remove(file_name)
     finally:
-        return render_template('6th_test.html')
+        return redirect(url_for('fifth.sound'))
