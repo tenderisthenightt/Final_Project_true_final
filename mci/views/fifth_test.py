@@ -81,4 +81,4 @@ def get_screenshot():
     try:
         os.remove(file_name)
     finally:
-        return redirect(url_for('fifth.sound'))
+        return redirect(url_for('sixth.sound'))
