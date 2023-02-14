@@ -50,10 +50,25 @@ def image_similarity():
 
 
     print('333333333333333')
-    # global model
+    global model
 
-    features1 = get_image_feature(p_path)
-    features2 = get_image_feature(img_path)
+    img = utils.load_img(p_path, target_size=(224, 224))
+    img = utils.img_to_array(img)
+    img = np.expand_dims(img, axis=0)
+    img = kapp.vgg16.preprocess_input(img)
+    features1 = model.predict(img)
+    features1 = features1.flatten()
+
+    img = utils.load_img(img_path, target_size=(224, 224))
+    img = utils.img_to_array(img)
+    img = np.expand_dims(img, axis=0)
+    img = kapp.vgg16.preprocess_input(img)
+    features2 = model.predict(img)
+    features2 = features2.flatten()
+
+
+    #features1 = get_image_feature(p_path)
+    #features2 = get_image_feature(img_path)
     print('44444444444444')
     cosine_similarity = np.dot(features1, features2) / (np.linalg.norm(features1) * np.linalg.norm(features2))
     print(cosine_similarity)
