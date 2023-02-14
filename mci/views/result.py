@@ -54,7 +54,7 @@ def result():
     # if stroop_point == 8: # 2점 더 주기(문제가 8개라서.. 만약 10개로 늘어나면 삭제하기)
     #     stroop_point = 10
 
-    #3 write_point
+   #3 write_point
     write_point =str(sql[2][2])[2]# 점수를 str 으로 바꿔서 슬라이싱 해서 갖고 오기
     write_point = int(write_point)
     if write_point == '0':
@@ -107,7 +107,7 @@ def result():
     xs=np.linspace(1,6,500)
     ys=cubic_interploation_model1(xs) + 1
     zs=cubic_interploation_model2(xs) + 1
-    fig = plt.figure(figsize=(21, 6))
+    fig = plt.figure(figsize=(21, 5))
     ax = fig.add_subplot(1, 1, 1)
     ax.plot(xs, ys, color = '#5a918a', linewidth=0.7, label = '평균')
     ax.plot(xs, zs, color = '#3dd7ca', linewidth=0.7, label = '내점수')
@@ -124,7 +124,7 @@ def result():
     plt.ylim(0, 13)
     plt.legend(fontsize=15)
 
-    plt.savefig(f'./mci/static/dashboard/{guest}.jpg', dpi=400)
+    plt.savefig(f'./mci/static/dashboard/{guest}.jpg', dpi=500)
     
     sim_point, stroop_point, write_point, wrong_point, remember_point, stt_point = z * 10
     return render_template('dashboard.html', sim_point = sim_point, stroop_point = stroop_point, write_point = write_point,
