@@ -15,25 +15,30 @@ def s_quiz(stroop, dic):
     stroop.remove(key)
     h_path = dic[key][0]
     answer = dic[key][1]
-    return h_path, answer, stroop
+    return key, h_path, answer, stroop
 
 s_answer = ''
 
 OX = []
 count = 0
+key = ''
 
 @bp.route('/stroop', methods=['GET', 'POST']) ## 여기에 들어가야하는거 넣어주세요~!!!1 지영
 def stroop():
     global count
     global OX
     global s_list
+    global key
     if count != len(OX): #해당 페이지에서 새로고침만 계속하면 문제가 고갈되기에 추가할 조건문
-        s_list = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10']
+        if len(OX)>0:
+            s_list.append(key)
+        else:
+            s_list = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10']
         count = len(OX)
     count += 1
     print(s_list)
     global dic
-    h_path, answer, s_list = s_quiz(s_list, dic)
+    key, h_path, answer, s_list = s_quiz(s_list, dic)
     print(len(s_list))
     print(h_path)
     print(answer)

@@ -9,13 +9,13 @@ import sqlite3
 import PIL
 
 # 글그림 모델(yolov5)
-yolo_model = torch.hub.load('ultralytics/yolov5', 'custom', path = 'mci/module/best.pt', force_reload =True)
+#yolo_model = torch.hub.load('yolov5', 'custom', path = 'mci/module/best.pt', force_reload =False, source='local')
 
 @bp.route('/text_to_img')
 def text_to_img():
     return render_template('3rd_test.html')
 
-
+yolo_model = torch.hub.load('yolov5', 'custom', path = 'mci/module/best.pt', force_reload =False, source='local')
 @bp.route("/predict", methods=["GET", "POST"])
 def predict():
     # 이미지 받기(blob)
@@ -46,6 +46,7 @@ def predict():
     ########## 이 사진을 어떻게 가지고 올지에 대해서 알아봐야한다. !!
     global yolo_model
     # 추론
+    
     results = yolo_model(img)
 
 
