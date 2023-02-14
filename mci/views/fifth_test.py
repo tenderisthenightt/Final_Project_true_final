@@ -57,15 +57,15 @@ def get_screenshot():
     except:
         level = random.choice([2, 3, 4, 5, 6, 7, 8])
         result = get_score(int(level))
-    print(level)
-    print(result)
+    
     try:
         level = request.form['score']
         result = get_score(int(level))
     except:
         level = random.choice([2, 3, 4, 5, 6, 7, 8])
         result = get_score(int(level))
-                    
+    print(level)
+    print(result)
     # 텍스트로 추출한 결과를 DB에 저장
     conn = sqlite3.connect('ijm.db', isolation_level=None)
     cursor = conn.cursor()
