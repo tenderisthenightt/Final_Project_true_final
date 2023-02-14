@@ -127,5 +127,6 @@ def result():
     plt.savefig(f'./mci/static/dashboard/{guest}.png', dpi=500, bbox_inches='tight')
     
     sim_point, stroop_point, write_point, wrong_point, remember_point, stt_point = z * 10
+    session.clear()
     return render_template('dashboard.html', sim_point = sim_point, stroop_point = stroop_point, write_point = write_point,
                             wrong_point = wrong_point, remember_point = remember_point, stt_point = stt_point, guest=guest)    

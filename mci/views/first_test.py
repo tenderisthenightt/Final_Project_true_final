@@ -21,9 +21,7 @@ anch = ''
 @bp.route("/vgg")
 def similarity_image():
     q, p_path, h_path, sim = random_sim()
-    global anch
-    anch = q
-    print(anch)
+    session['anch'] = q
     return render_template('1st_test.html', h_path=h_path)
 
 @bp.route("/image_similarity", methods=["POST"])
@@ -38,8 +36,7 @@ def image_similarity():
         img_path = 'drawing/sim/' + guest + '.png'
         image.save(img_path)
         print('222222222222222222')
-        global anch
-        print(anch)
+        anch = session['anch']
         global anchor
         p_path = anchor[anch][0]
         sim = anchor[anch][2]
