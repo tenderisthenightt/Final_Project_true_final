@@ -75,8 +75,8 @@
 
       #image-container1 {
         position: fixed;
-        bottom: 40px;
-        left: 40px;
+        bottom: 80px;
+        left: 100px;
       }
       #image-container1 img {
         width: 150px;
@@ -85,13 +85,14 @@
       #speech-bubble1 {
         display: none;
         position: absolute;
-        bottom: 200px;
+        bottom: 150px;
         right: auto;
-        top: -115px;
+        top: auto;
         background-color: #fff;
         padding: 10px;
         border-radius: 10px;
         box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+        display: block;
       }
       
       #image-container1:hover #speech-bubble1 {
@@ -117,7 +118,7 @@
   <div id="image-container1">
     <img src="{{ url_for('static', filename = 'img/drawing.png')}}" alt="Image" style="width: 110px; height: auto;">
     <div id="speech-bubble1">
-      <center><p>과연<br> 전부 다<br> 할 수 있을까?</p>
+      <center><p>전두엽<br>측두엽<br>후두엽<br><br>시각적 학습<br>기하학적 모양에 대한 기억력<br>즉각/지연 상기<br>소근육 조절</p>
     </div>
   </div>
   <div class='container'>

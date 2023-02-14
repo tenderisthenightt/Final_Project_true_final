@@ -82,8 +82,8 @@
         }
         #image-container1 {
           position: fixed;
-          bottom: 40px;
-          left: 40px;
+          bottom: 60px;
+          left: 70px;
         }
         #image-container1 img {
           width: 150px;
@@ -92,13 +92,14 @@
         #speech-bubble1 {
           display: none;
           position: absolute;
-          bottom: 200px;
+          bottom: 150px;
           right: auto;
-          top: -115px;
+          top: auto;
           background-color: #fff;
           padding: 10px;
           border-radius: 10px;
           box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+          display: block;
         }
         
         #image-container1:hover #speech-bubble1 {
@@ -109,7 +110,7 @@
     <div id="image-container1">
       <img src="{{ url_for('static', filename = 'img/rabbit.png')}}" alt="Image" style="width: 110px; height: auto;">
       <div id="speech-bubble1">
-        <center><p>과연<br> 전부 다<br> 할 수 있을까?</p>
+        <center><p>운동중추<br전두엽<br>측두엽<br>베르니케<br><br>주의집중 도출<br>운동속도<br>소근육 조절<br>집행 기능<br>빠른 의사결정</p>
       </div>
     </div>
     <div class='container'>

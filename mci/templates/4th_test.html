@@ -41,7 +41,7 @@
           <div id="image-container1">
             <img src="{{ url_for('static', filename = 'img/thinking.png')}}" alt="Image" style="width: 110px; height: auto;">
             <div id="speech-bubble1">
-              <center><p>과연<br> 전부 다<br> 할 수 있을까?</p>
+              <center><p>측두엽<br>후두엽<br><br>시각적 학습<br>선택 반응 시간<br>즉각적인 의사결정</p>
             </div>
           </div>
           <style>
@@ -74,29 +74,30 @@
               display: block;
             }
             #image-container1 {
-                position: fixed;
-                bottom: 40px;
-                left: 40px;
-              }
-              #image-container1 img {
-                width: 150px;
-                height: 150px;
-              }
-              #speech-bubble1 {
-                display: none;
-                position: absolute;
-                bottom: 200px;
-                right: auto;
-                top: -115px;
-                background-color: #fff;
-                padding: 10px;
-                border-radius: 10px;
-                box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
-              }
-              
-              #image-container1:hover #speech-bubble1 {
-                display: block;
-              }
+              position: fixed;
+              bottom: 60px;
+              left: 60px;
+            }
+            #image-container1 img {
+              width: 150px;
+              height: 150px;
+            }
+            #speech-bubble1 {
+              display: none;
+              position: absolute;
+              bottom: 150px;
+              right: auto;
+              top: auto;
+              background-color: #fff;
+              padding: 10px;
+              border-radius: 10px;
+              box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+              display: block;
+            }
+            
+            #image-container1:hover #speech-bubble1 {
+              display: block;
+            }
           </style>
     <br>
         <div style="border: px solid; padding :10px; width: 820px; 
