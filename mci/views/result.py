@@ -91,7 +91,7 @@ def result():
     
     
     #6 stt_point
-    if sql[5][4]==1 : stt_point = 10 
+    if sql[5][5]==1 : stt_point = 10 
     else:stt_point = 0
     
     
