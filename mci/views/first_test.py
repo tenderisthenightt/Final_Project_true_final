@@ -51,6 +51,7 @@ def image_similarity():
 
     print('333333333333333')
     global model
+    print('here')
 
     img = utils.load_img(p_path, target_size=(224, 224))
     img = utils.img_to_array(img)
@@ -58,14 +59,14 @@ def image_similarity():
     img = kapp.vgg16.preprocess_input(img)
     features1 = model.predict(img)
     features1 = features1.flatten()
-
+    print('there')
     img = utils.load_img(img_path, target_size=(224, 224))
     img = utils.img_to_array(img)
     img = np.expand_dims(img, axis=0)
     img = kapp.vgg16.preprocess_input(img)
     features2 = model.predict(img)
     features2 = features2.flatten()
-
+    
 
     #features1 = get_image_feature(p_path)
     #features2 = get_image_feature(img_path)
