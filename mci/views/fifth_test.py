@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, session, jsonify
+import random
 
 bp = Blueprint('fifth', __name__, url_prefix='/')
 
@@ -44,6 +45,9 @@ def get_screenshot():
         for res in result:
             if res[1][0:10] == 'Your level':
                 level = res[1][-1]
+                result = get_score(int(level))
+            else:
+                level = random.choice([2, 3, 4, 5, 6, 7, 8])
                 result = get_score(int(level))
                 
     # 텍스트로 추출한 결과를 DB에 저장
