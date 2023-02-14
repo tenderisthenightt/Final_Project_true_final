@@ -71,5 +71,7 @@ def get_screenshot():
                     VALUES(?, ?, ?, ?)""", (guest, game, result[0], result[1]))
     conn.commit()
     cursor.close()
-    os.remove(file_name)
-    return jsonify({'file_name':file_name})
+    try:
+        os.remove(file_name)
+    finally:
+        return jsonify({'file_name':file_name})
