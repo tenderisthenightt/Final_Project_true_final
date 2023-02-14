@@ -44,17 +44,18 @@ def get_screenshot():
     
     game = 'Memory_Test'
     
-    with open(file_name,'rb') as pf:
-        img = pf.read()
-        result = reader.readtext(img)
-        for res in result:
-            if res[1][0:10] == 'Your level':
-                level = res[1][-1]
-                result = get_score(int(level))
-            else:
-                level = random.choice([2, 3, 4, 5, 6, 7, 8])
-                result = get_score(int(level))
-                
+    try:
+        with open(file_name,'rb') as pf:
+            img = pf.read()
+            result = reader.readtext(img)
+            for res in result:
+                if res[1][0:10] == 'Your level':
+                    level = res[1][-1]
+                    result = get_score(int(level))
+    except:
+        level = random.choice([2, 3, 4, 5, 6, 7, 8])
+        result = get_score(int(level))
+                    
     # 텍스트로 추출한 결과를 DB에 저장
     conn = sqlite3.connect('ijm.db', isolation_level=None)
     cursor = conn.cursor()
