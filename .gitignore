@@ -1,4 +1,0 @@
-*.pyc
-mci/views/__pycache__
-drawing/*.png
-ijm.db
