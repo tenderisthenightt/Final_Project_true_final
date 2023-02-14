@@ -72,6 +72,31 @@
       #image-container:hover #speech-bubble {
         display: block;
       }
+
+      #image-container1 {
+        position: fixed;
+        bottom: 40px;
+        left: 40px;
+      }
+      #image-container1 img {
+        width: 150px;
+        height: 150px;
+      }
+      #speech-bubble1 {
+        display: none;
+        position: absolute;
+        bottom: 200px;
+        right: auto;
+        top: -115px;
+        background-color: #fff;
+        padding: 10px;
+        border-radius: 10px;
+        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+      }
+      
+      #image-container1:hover #speech-bubble1 {
+        display: block;
+      }
   </style>
 
 </head>
@@ -87,6 +112,12 @@
     <img src="{{ url_for('static', filename = 'face/dongwhan.png')}}" alt="Image">
     <div id="speech-bubble">
       <center><p>잘 그리지 않아도 돼!<br> 특징적인 부분을<br> 그려봐</p>
+    </div>
+  </div>
+  <div id="image-container1">
+    <img src="{{ url_for('static', filename = 'img/drawing.png')}}" alt="Image" style="width: 110px; height: auto;">
+    <div id="speech-bubble1">
+      <center><p>과연<br> 전부 다<br> 할 수 있을까?</p>
     </div>
   </div>
   <div class='container'>
