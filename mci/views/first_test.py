@@ -14,7 +14,6 @@ import sqlite3
 
 #vgg_model = kapp.VGG16(weights='imagenet', include_top=False)
 #model = kmodels.Model(inputs=vgg_model.input, outputs=vgg_model.get_layer('block5_pool').output)
-anch = ''
 
 # def get_image_feature(image):
 #     img = utils.load_img(image, target_size=(224, 224))
