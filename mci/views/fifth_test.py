@@ -81,4 +81,4 @@ def get_screenshot():
     try:
         os.remove(file_name)
     finally:
-        return jsonify({'file_name':file_name})
+        return render_template('6th_test.html')
