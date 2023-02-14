@@ -33,10 +33,15 @@ def get_screenshot():
 
     # 기억력 게임을 완료한 이후 easyocr을 이용해 게임결과 이미지에서 텍스트추출
     guest = str(session['guest'])
-    im = pyscreenshot.grab()
-    file_name = 'drawing/pygame/{}.png'.format(guest)
-    im.save(file_name)
-    reader = easyocr.Reader(['ko', 'en'])
+    try:
+        im = pyscreenshot.grab()
+        file_name = 'drawing/pygame/{}.png'.format(guest)
+        im.save(file_name)
+        reader = easyocr.Reader(['ko', 'en'])
+    except:
+        level = random.choice([2, 3, 4, 5, 6, 7, 8])
+        result = get_score(int(level))
+    
     game = 'Memory_Test'
     
     with open(file_name,'rb') as pf:
