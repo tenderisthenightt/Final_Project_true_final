@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, jsonify, session
+from flask import Blueprint, render_template, request, jsonify, session, g
 import sqlite3 as sql
 from time import sleep
 import urllib3
@@ -7,15 +7,18 @@ import base64
 
 bp = Blueprint('sixth', __name__, url_prefix='/')
 
-DATABASE_URI = 'ijm.db'
-
-sound_target = '강아지가 방에 들어오면 고양이는 의자 밑에 숨는다' # 정답Text
-print(sound_target)
 
 
+# sound_target = '강아지가 방에 들어오면 고양이는 의자 밑에 숨는다' # 정답Text
+# print(sound_target)
+
+@bp.before_app_request
+def before_sixth():
+    g.sound_target = '강아지가 방에 들어오면 고양이는 의자 밑에 숨는다'
+    g.DATABASE_URI = 'ijm.db'
 @bp.route('/sound')
 def sound():
-    global sound_target
+    sound_target = g.sound_target
     return render_template('6th_test.html', target=sound_target)
 @bp.route('/loading')
 def roading():
@@ -33,7 +36,7 @@ def STT():
     #      STT Open API
     #---------------------------------------------------------------------------
     if request.method == 'POST':
-        global sound_target
+        sound_target = g.sound_target
         openApiURL = "http://aiopen.etri.re.kr:8000/WiseASR/Recognition"
         accessKey = "f0f9fd15-daef-4655-b516-d7a9711c696a" 
         audioFilePath = request.files['recode'] # 다운로드한 음성파일을 여기에 넣어서 Text로 바꾸기
@@ -147,7 +150,7 @@ def STT():
         print(sentence1)
         print(String)
         
-        conn = sql.connect(DATABASE_URI, isolation_level=None)
+        conn = sql.connect(g.DATABASE_URI, isolation_level=None)
         cur = conn.cursor()
         cur.execute(
         """CREATE TABLE IF NOT EXISTS STT (session TEXT PRIMARY KEY NOT NULL,

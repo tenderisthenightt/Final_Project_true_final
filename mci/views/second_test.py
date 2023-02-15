@@ -1,34 +1,45 @@
-from flask import Blueprint, render_template, request, session, redirect
+from flask import Blueprint, render_template, request, session, redirect, g
 import sqlite3
 from random import choice
 bp = Blueprint('second', __name__, url_prefix='/')
 
-s_list = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10']
+def s_quiz(stroop, dic):
+        key = choice(stroop)
+        stroop.remove(key)
+        h_path = dic[key][0]
+        answer = dic[key][1]
+        return key, h_path, answer, stroop
+
+
+# s_list = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10']   
+# s_answer = ''
+# OX = []
+# s_count = 0
+# key = ''
+
 
 dic = {'01':['/static/2/img/001.png', '빨강'], '02':['/static/2/img/002.png', '파랑'], '03':['/static/2/img/003.png', '노랑'],
-'04':['/static/2/img/004.png', '빨강'], '05':['/static/2/img/005.png', '파랑'], '06':['/static/2/img/006.png', '검정'],
-'07':['/static/2/img/007.png', '노랑'], '08':['/static/2/img/008.png', '빨강'], '09':['/static/2/img/009.png', '파랑'],
-'10':['/static/2/img/010.png', '검정']}
+    '04':['/static/2/img/004.png', '빨강'], '05':['/static/2/img/005.png', '파랑'], '06':['/static/2/img/006.png', '검정'],
+    '07':['/static/2/img/007.png', '노랑'], '08':['/static/2/img/008.png', '빨강'], '09':['/static/2/img/009.png', '파랑'],
+    '10':['/static/2/img/010.png', '검정']}
 
-def s_quiz(stroop, dic):
-    key = choice(stroop)
-    stroop.remove(key)
-    h_path = dic[key][0]
-    answer = dic[key][1]
-    return key, h_path, answer, stroop
 
-s_answer = ''
 
-OX = []
-count = 0
-key = ''
-
+# @bp.before_request
+# def before_second():
+#     print('hi')
+#     g.s_list = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10']
+#     g.s_answer = ''
+#     g.OX = []
+#     g.s_count = 0
+#     g.key = ''
 @bp.route('/stroop', methods=['GET', 'POST']) ## 여기에 들어가야하는거 넣어주세요~!!!1 지영
 def stroop():
-    global count
-    global OX
-    global s_list
-    global key
+    count = session['s_count']
+    OX = session['OX']
+    s_list = session['s_list']
+    key = session['key']
+    print(count)
     if count != len(OX): #해당 페이지에서 새로고침만 계속하면 문제가 고갈되기에 추가할 조건문
         if len(OX)>0:
             s_list.append(key)
@@ -38,12 +49,13 @@ def stroop():
     count += 1
     print(s_list)
     global dic
-    key, h_path, answer, s_list = s_quiz(s_list, dic)
+    session['key'], h_path, answer, s_list = s_quiz(s_list, dic)
     print(len(s_list))
     print(h_path)
     print(answer)
-    global s_answer
-    s_answer = answer
+    session['s_answer']= answer
+    print(len(OX))
+    session['s_count'] = count
     return render_template('2nd_test.html', h_path = h_path)
 
 
@@ -51,16 +63,16 @@ def stroop():
 @bp.route("/save",methods=['POST']) #flask 웹 페이지 경로
 def save(): # 경로에서 실행될 기능 선언
     
-    global OX
+    OX = session['OX']
     print(type(OX))
     print(OX)
     ans = str(request.form['answer'])
-    global s_answer
-    if ans == s_answer:
+    # s_answer = session['s_answer']
+    if ans == session['s_answer']:
         OX.append(1)
     else:
         OX.append(0)
-
+    session['OX'] = OX
     # # 확인용
     # check = request.form['check']
     # print(check)
@@ -101,8 +113,8 @@ def save(): # 경로에서 실행될 기능 선언
         conn.commit()
         cursor.close()
         conn.close()
-        OX = []
-        global s_list
-        s_list = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10']
+        session['OX'] = []
+        session['s_count'] = 0
+        session['s_list'] = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10']
         return render_template('3rd_test.html')
     return redirect('/stroop')

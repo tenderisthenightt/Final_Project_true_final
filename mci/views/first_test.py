@@ -12,25 +12,22 @@ import keras.utils as utils
 from ..module.anchor import *
 import sqlite3
 
-vgg_model = kapp.VGG16(weights='imagenet', include_top=False)
-model = kmodels.Model(inputs=vgg_model.input, outputs=vgg_model.get_layer('block5_pool').output)
-anch = ''
+#vgg_model = kapp.VGG16(weights='imagenet', include_top=False)
+#model = kmodels.Model(inputs=vgg_model.input, outputs=vgg_model.get_layer('block5_pool').output)
 
-def get_image_feature(image):
-    img = utils.load_img(image, target_size=(224, 224))
-    img = utils.img_to_array(img)
-    img = np.expand_dims(img, axis=0)
-    img = kapp.vgg16.preprocess_input(img)
-    features = model.predict(img)
-    features = features.flatten()
-    return features
+# def get_image_feature(image):
+#     img = utils.load_img(image, target_size=(224, 224))
+#     img = utils.img_to_array(img)
+#     img = np.expand_dims(img, axis=0)
+#     img = kapp.vgg16.preprocess_input(img)
+#     features = model.predict(img)
+#     features = features.flatten()
+#     return features
 
 @bp.route("/vgg")
 def similarity_image():
     q, p_path, h_path, sim = random_sim()
-    global anch
-    anch = q
-    print(anch)
+    session['anch'] = q
     return render_template('1st_test.html', h_path=h_path)
 
 @bp.route("/image_similarity", methods=["POST"])
@@ -45,18 +42,39 @@ def image_similarity():
         img_path = 'drawing/sim/' + guest + '.png'
         image.save(img_path)
         print('222222222222222222')
-        global anch
-        print(anch)
+        anch = session['anch']
         global anchor
         p_path = anchor[anch][0]
         sim = anchor[anch][2]
 
 
     print('333333333333333')
+    vgg_model = kapp.VGG16(weights='imagenet', include_top=False)
+    model = kmodels.Model(inputs=vgg_model.input, outputs=vgg_model.get_layer('block5_pool').output)
+    print('here')
+
+    img = utils.load_img(p_path, target_size=(224, 224))
+    print('here1')
+    img = utils.img_to_array(img)
+    print('here2')
+    img = np.expand_dims(img, axis=0)
+    print('here3')
+    img = kapp.vgg16.preprocess_input(img)
+    print('here4')
+    features1 = model.predict(img)
+    print('here5')
+    features1 = features1.flatten()
+    print('there')
+    img = utils.load_img(img_path, target_size=(224, 224))
+    img = utils.img_to_array(img)
+    img = np.expand_dims(img, axis=0)
+    img = kapp.vgg16.preprocess_input(img)
+    features2 = model.predict(img)
+    features2 = features2.flatten()
     
 
-    features1 = get_image_feature(p_path)
-    features2 = get_image_feature(img_path)
+    #features1 = get_image_feature(p_path)
+    #features2 = get_image_feature(img_path)
     print('44444444444444')
     cosine_similarity = np.dot(features1, features2) / (np.linalg.norm(features1) * np.linalg.norm(features2))
     print(cosine_similarity)
