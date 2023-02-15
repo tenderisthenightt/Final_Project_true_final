@@ -37,13 +37,13 @@ def get_screenshot():
     level = request.form['score']
     print('good')
     result = get_score(int(level))
-    try:
-        im = pyscreenshot.grab()
-        file_name = 'drawing/pygame/{}.png'.format(guest)
-        im.save(file_name)
-        reader = easyocr.Reader(['ko', 'en'])
-    except:
-        game = 'Memory_Test'
+    # try:
+    #     im = pyscreenshot.grab()
+    #     file_name = 'drawing/pygame/{}.png'.format(guest)
+    #     im.save(file_name)
+    #     reader = easyocr.Reader(['ko', 'en'])
+    # except:
+    game = 'Memory_Test'
     
     try:
         with open(file_name,'rb') as pf:
