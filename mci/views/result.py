@@ -109,11 +109,11 @@ def result():
     zs=cubic_interploation_model2(xs) + 1
     fig = plt.figure(figsize=(21, 5))
     ax = fig.add_subplot(1, 1, 1)
-    ax.plot(xs, ys, color = '#5a918a', linewidth=0.7, label = '평균')
-    ax.plot(xs, zs, color = '#3dd7ca', linewidth=0.7, label = '내점수')
+    ax.plot(xs, ys, color = '#5a918a', linewidth=0.7, label = 'average')
+    ax.plot(xs, zs, color = '#3dd7ca', linewidth=0.7, label = 'my point')
     ax.set_xticks([1, 2, 3, 4, 5, 6])
     ax.set_yticks([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11])
-    ax.set_xticklabels(['비슷한 그림 \n그리기', '글자 색 \n맞히기', '제시 단어 \n그리기', '다른 그림 찾기', '숫자 순서 \n맞히기', '문장 따라 \n말하기'], 
+    ax.set_xticklabels(['1st', '2nd', '3rd', '4th', '5th', '6th'], 
                         fontsize=15, alpha = 1)
     ax.set_yticklabels([None, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10], fontsize=12, alpha = 1)
     ax.patch.set_facecolor('white')

@@ -17,6 +17,10 @@ print(sound_target)
 def sound():
     global sound_target
     return render_template('6th_test.html', target=sound_target)
+@bp.route('/loading')
+def roading():
+    # 결과를 HTML 페이지에 삽입
+    return render_template('6-2.html')
 
 @bp.route('/STT', methods=['POST', 'GET'])
 def STT():
