@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, session
+from flask import Blueprint, render_template, session, redirect, url_for
 import numpy as np
 from scipy.interpolate import interp1d
 import matplotlib.pyplot as plt 
@@ -11,22 +11,25 @@ def result():
     guest = str(session['guest'])
     conn = sqlite3.connect('ijm.db', isolation_level=None)
     # 커서
-    c = conn.cursor()
-    a = ['Sim_Test','Stroop','Txt_to_Img', 'Wrong_Image', 'Memory_Test','STT']
-    sql = []
-    for i in range(len(a)):
-        print(i)
-        c.execute("SELECT * FROM "+ a[i] + " WHERE session = '{}'".format(guest))
-        db =c.fetchone()
-        sql.append(db)
-        print(db)
-    # 1. 맞으면 10점 틀리면 0점
-    # 2. 개당 1점 
-    # 3. 0.1 -> 1점...?? 이건 이야기 해봐야 할듯
-    #4. 1개당 3점 , 다 맟히면 10점
-    #5. 점수 갖고오기
-    #6. 맞으면 10점 틀리면 0점
-    #np.array['sim_point','stroop_point','write_point','wrong_point','remember_point','stt_point']
+    try:
+        c = conn.cursor()
+        a = ['Sim_Test','Stroop','Txt_to_Img', 'Wrong_Image', 'Memory_Test','STT']
+        sql = []
+        for i in range(len(a)):
+            print(i)
+            c.execute("SELECT * FROM "+ a[i] + " WHERE session = '{}'".format(guest))
+            db =c.fetchone()
+            sql.append(db)
+            print(db)
+        # 1. 맞으면 10점 틀리면 0점
+        # 2. 개당 1점 
+        # 3. 0.1 -> 1점...?? 이건 이야기 해봐야 할듯
+        #4. 1개당 3점 , 다 맟히면 10점
+        #5. 점수 갖고오기
+        #6. 맞으면 10점 틀리면 0점
+        #np.array['sim_point','stroop_point','write_point','wrong_point','remember_point','stt_point']
+    except:
+        return redirect(url_for('main.intro'), msg='문제를 전부 풀어주세요')
 
     #1 sim_point
     if sql[0][3] == 0:
@@ -127,5 +130,6 @@ def result():
     plt.savefig(f'./mci/static/dashboard/{guest}.png', dpi=500, bbox_inches='tight')
     
     sim_point, stroop_point, write_point, wrong_point, remember_point, stt_point = z * 10
+    session.clear()
     return render_template('dashboard.html', sim_point = sim_point, stroop_point = stroop_point, write_point = write_point,
                             wrong_point = wrong_point, remember_point = remember_point, stt_point = stt_point, guest=guest)    
