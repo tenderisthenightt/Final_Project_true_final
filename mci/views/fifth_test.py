@@ -29,14 +29,18 @@ def pygame():
 
 @bp.route('/get_screenshot', methods=['POST'])
 def get_screenshot():
-    level = int(request.form['score'])
-
+    try:
+        level = int(request.form['score'])
+        result = get_score(int(level))
+    except:
+        level = random.choice([2, 3, 4, 5, 6, 7, 8])
+        result = get_score(int(level))
 
     # 기억력 게임을 완료한 이후 easyocr을 이용해 게임결과 이미지에서 텍스트추출
     guest = str(session['guest'])
     
     print('good')
-    result = get_score(int(level))
+    
     # try:
     #     im = pyscreenshot.grab()
     #     file_name = 'drawing/pygame/{}.png'.format(guest)
