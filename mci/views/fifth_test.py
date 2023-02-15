@@ -40,11 +40,7 @@ def get_screenshot():
         im.save(file_name)
         reader = easyocr.Reader(['ko', 'en'])
     except:
-        level = random.choice([2, 3, 4, 5, 6, 7, 8])
-        result = get_score(int(level))
-    print(level)
-    print(result)
-    game = 'Memory_Test'
+        game = 'Memory_Test'
     
     try:
         with open(file_name,'rb') as pf:
@@ -55,15 +51,11 @@ def get_screenshot():
                     level = res[1][-1]
                     result = get_score(int(level))
     except:
-        level = random.choice([2, 3, 4, 5, 6, 7, 8])
-        result = get_score(int(level))
-    
-    try:
         level = request.form['score']
         result = get_score(int(level))
-    except:
-        level = random.choice([2, 3, 4, 5, 6, 7, 8])
-        result = get_score(int(level))
+    # except:
+    #     level = random.choice([2, 3, 4, 5, 6, 7, 8])
+    #     result = get_score(int(level))
     print(level)
     print(result)
     # 텍스트로 추출한 결과를 DB에 저장
