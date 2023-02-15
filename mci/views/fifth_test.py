@@ -35,6 +35,7 @@ def get_screenshot():
     # 기억력 게임을 완료한 이후 easyocr을 이용해 게임결과 이미지에서 텍스트추출
     guest = str(session['guest'])
     level = request.form['score']
+    print('good')
     result = get_score(int(level))
     try:
         im = pyscreenshot.grab()
