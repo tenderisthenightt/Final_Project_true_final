@@ -98,7 +98,7 @@ def result():
     # 대시보드 그래프
     plt.style.use('ggplot')
     x=np.array([1,2,3,4,5,6])
-    y=np.array([0, 10, 0, 6, 10, 0])
+    y=np.array([9, 5, 8, 6, 10, 5])
     z=np.array([sim_point,stroop_point,write_point,wrong_point,remember_point,stt_point])
 
     plt.rc('font', family='Malgun Gothic')
