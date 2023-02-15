@@ -1,9 +1,0 @@
-*.pyc
-mci/views/__pycache__
-__pycache__
-logs
-ijm.db
-uwsgi.log
-drawing/pygame/*.png
-drawing/sim/*.png
-drawing/txt_to_img/*.png
