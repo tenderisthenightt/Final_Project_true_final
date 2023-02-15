@@ -61,9 +61,10 @@ def predict():
    
     # 오답 여부
     OX = []
-    if conf.name[0] == 'rabbit':
-        OX.append(1)
-    else:
+    try:
+        if conf.name[0] == 'rabbit':
+            OX.append(1)
+    except:
         OX.append(0)
     
 
