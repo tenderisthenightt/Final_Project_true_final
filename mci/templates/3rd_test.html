@@ -82,8 +82,8 @@
         }
         #image-container1 {
           position: fixed;
-          bottom: 60px;
-          left: 70px;
+          bottom: 80px;
+          left: 100px;
         }
         #image-container1 img {
           width: 150px;
@@ -92,14 +92,14 @@
         #speech-bubble1 {
           display: none;
           position: absolute;
-          bottom: 150px;
-          right: auto;
-          top: auto;
+          bottom: 125px;
+          top: -250px;
           background-color: #fff;
           padding: 10px;
           border-radius: 10px;
           box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
           display: block;
+          width: 200px;
         }
         
         #image-container1:hover #speech-bubble1 {
@@ -108,9 +108,9 @@
       </style>
     </div>
     <div id="image-container1">
-      <img src="{{ url_for('static', filename = 'img/rabbit.png')}}" alt="Image" style="width: 110px; height: auto;">
+      <img src="{{ url_for('static', filename = 'img/painting.png')}}" alt="Image" style="width: 110px; height: auto;">
       <div id="speech-bubble1">
-        <center><p>운동중추<br전두엽<br>측두엽<br>베르니케<br><br>주의집중 도출<br>운동속도<br>소근육 조절<br>집행 기능<br>빠른 의사결정</p>
+        <center><p>운동중추<br전두엽<br>측두엽<br>베르니케 영역<br>🧠<br>주의집중 도출<br>운동속도<br>소근육 조절<br>집행 기능<br>빠른 의사결정</p>
       </div>
     </div>
     <div class='container'>
