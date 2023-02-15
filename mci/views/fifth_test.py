@@ -29,7 +29,7 @@ def pygame():
 
 @bp.route('/get_screenshot', methods=['POST'])
 def get_screenshot():
-    level = request.form['score']
+    level = int(request.form['score'])
 
 
     # 기억력 게임을 완료한 이후 easyocr을 이용해 게임결과 이미지에서 텍스트추출
