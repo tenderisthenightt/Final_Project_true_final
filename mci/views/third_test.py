@@ -58,7 +58,6 @@ def predict():
     # results.pandas().xyxy[0]  # 예측 (pandas)
     conf = results.pandas().xyxy[0]
     print(conf)
-   
     # 오답 여부
     OX = []
     try:
