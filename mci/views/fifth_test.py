@@ -29,12 +29,12 @@ def pygame():
 
 @bp.route('/get_screenshot', methods=['POST'])
 def get_screenshot():
-    
+    level = request.form['score']
 
 
     # 기억력 게임을 완료한 이후 easyocr을 이용해 게임결과 이미지에서 텍스트추출
     guest = str(session['guest'])
-    level = request.form['score']
+    
     print('good')
     result = get_score(int(level))
     # try:
@@ -45,16 +45,16 @@ def get_screenshot():
     # except:
     game = 'Memory_Test'
     
-    try:
-        with open(file_name,'rb') as pf:
-            img = pf.read()
-            result = reader.readtext(img)
-            for res in result:
-                if res[1][0:10] == 'Your level':
-                    level = res[1][-1]
-                    result = get_score(int(level))
-    except:
-        print('hi')
+    # try:
+    #     with open(file_name,'rb') as pf:
+    #         img = pf.read()
+    #         result = reader.readtext(img)
+    #         for res in result:
+    #             if res[1][0:10] == 'Your level':
+    #                 level = res[1][-1]
+    #                 result = get_score(int(level))
+    # except:
+    #     print('hi')
 
     # except:
     #     level = random.choice([2, 3, 4, 5, 6, 7, 8])
