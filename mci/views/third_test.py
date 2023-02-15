@@ -63,6 +63,8 @@ def predict():
     try:
         if conf.name[0] == 'rabbit':
             OX.append(1)
+        else:
+            OX.append(0)
     except:
         OX.append(0)
     
