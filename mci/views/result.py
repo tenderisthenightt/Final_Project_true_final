@@ -49,6 +49,8 @@ def result():
                 stroop_point += 1
             elif sql[1][i]== 0:
                 stroop_point +=0
+    except:
+        stroop_point=0
 
     ## 방법2. 모든 컬럼을 하나의 list 에 담기 - stroop_point = len(list()) 
     # index = range(2,10)
