@@ -29,41 +29,40 @@ def pygame():
 
 @bp.route('/get_screenshot', methods=['POST'])
 def get_screenshot():
-    
-
+    try:
+        level = int(request.form['score'])
+        result = get_score(int(level))
+    except:
+        level = random.choice([2, 3, 4, 5, 6, 7, 8])
+        result = get_score(int(level))
 
     # 기억력 게임을 완료한 이후 easyocr을 이용해 게임결과 이미지에서 텍스트추출
     guest = str(session['guest'])
-    try:
-        im = pyscreenshot.grab()
-        file_name = 'drawing/pygame/{}.png'.format(guest)
-        im.save(file_name)
-        reader = easyocr.Reader(['ko', 'en'])
-    except:
-        level = random.choice([2, 3, 4, 5, 6, 7, 8])
-        result = get_score(int(level))
-    print(level)
-    print(result)
+    
+    print('good')
+    
+    # try:
+    #     im = pyscreenshot.grab()
+    #     file_name = 'drawing/pygame/{}.png'.format(guest)
+    #     im.save(file_name)
+    #     reader = easyocr.Reader(['ko', 'en'])
+    # except:
     game = 'Memory_Test'
     
-    try:
-        with open(file_name,'rb') as pf:
-            img = pf.read()
-            result = reader.readtext(img)
-            for res in result:
-                if res[1][0:10] == 'Your level':
-                    level = res[1][-1]
-                    result = get_score(int(level))
-    except:
-        level = random.choice([2, 3, 4, 5, 6, 7, 8])
-        result = get_score(int(level))
-    
-    try:
-        level = request.form['score']
-        result = get_score(int(level))
-    except:
-        level = random.choice([2, 3, 4, 5, 6, 7, 8])
-        result = get_score(int(level))
+    # try:
+    #     with open(file_name,'rb') as pf:
+    #         img = pf.read()
+    #         result = reader.readtext(img)
+    #         for res in result:
+    #             if res[1][0:10] == 'Your level':
+    #                 level = res[1][-1]
+    #                 result = get_score(int(level))
+    # except:
+    #     print('hi')
+
+    # except:
+    #     level = random.choice([2, 3, 4, 5, 6, 7, 8])
+    #     result = get_score(int(level))
     print(level)
     print(result)
     # 텍스트로 추출한 결과를 DB에 저장

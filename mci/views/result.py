@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, session
+from flask import Blueprint, render_template, session, redirect, url_for
 import numpy as np
 from scipy.interpolate import interp1d
 import matplotlib.pyplot as plt 
@@ -11,22 +11,25 @@ def result():
     guest = str(session['guest'])
     conn = sqlite3.connect('ijm.db', isolation_level=None)
     # 커서
-    c = conn.cursor()
-    a = ['Sim_Test','Stroop','Txt_to_Img', 'Wrong_Image', 'Memory_Test','STT']
-    sql = []
-    for i in range(len(a)):
-        print(i)
-        c.execute("SELECT * FROM "+ a[i] + " WHERE session = '{}'".format(guest))
-        db =c.fetchone()
-        sql.append(db)
-        print(db)
-    # 1. 맞으면 10점 틀리면 0점
-    # 2. 개당 1점 
-    # 3. 0.1 -> 1점...?? 이건 이야기 해봐야 할듯
-    #4. 1개당 3점 , 다 맟히면 10점
-    #5. 점수 갖고오기
-    #6. 맞으면 10점 틀리면 0점
-    #np.array['sim_point','stroop_point','write_point','wrong_point','remember_point','stt_point']
+    try:
+        c = conn.cursor()
+        a = ['Sim_Test','Stroop','Txt_to_Img', 'Wrong_Image', 'Memory_Test','STT']
+        sql = []
+        for i in range(len(a)):
+            print(i)
+            c.execute("SELECT * FROM "+ a[i] + " WHERE session = '{}'".format(guest))
+            db =c.fetchone()
+            sql.append(db)
+            print(db)
+        # 1. 맞으면 10점 틀리면 0점
+        # 2. 개당 1점 
+        # 3. 0.1 -> 1점...?? 이건 이야기 해봐야 할듯
+        #4. 1개당 3점 , 다 맟히면 10점
+        #5. 점수 갖고오기
+        #6. 맞으면 10점 틀리면 0점
+        #np.array['sim_point','stroop_point','write_point','wrong_point','remember_point','stt_point']
+    except:
+        return redirect(url_for('main.intro'), msg='문제를 전부 풀어주세요')
 
     #1 sim_point
     if sql[0][3] == 0:
@@ -98,7 +101,7 @@ def result():
     # 대시보드 그래프
     plt.style.use('ggplot')
     x=np.array([1,2,3,4,5,6])
-    y=np.array([0, 10, 0, 6, 10, 0])
+    y=np.array([9, 5, 8, 6, 10, 5])
     z=np.array([sim_point,stroop_point,write_point,wrong_point,remember_point,stt_point])
 
     plt.rc('font', family='Malgun Gothic')
@@ -109,11 +112,11 @@ def result():
     zs=cubic_interploation_model2(xs) + 1
     fig = plt.figure(figsize=(21, 5))
     ax = fig.add_subplot(1, 1, 1)
-    ax.plot(xs, ys, color = '#5a918a', linewidth=0.7, label = 'Average')
-    ax.plot(xs, zs, color = '#3dd7ca', linewidth=0.7, label = 'My Score')
+    ax.plot(xs, ys, color = '#5a918a', linewidth=0.7, label = 'average')
+    ax.plot(xs, zs, color = '#3dd7ca', linewidth=0.7, label = 'my point')
     ax.set_xticks([1, 2, 3, 4, 5, 6])
     ax.set_yticks([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11])
-    ax.set_xticklabels(['1st Test', '2nd Test', '3rd Test', '4th Test', '5th Test', '6th Test'], 
+    ax.set_xticklabels(['1st', '2nd', '3rd', '4th', '5th', '6th'], 
                         fontsize=15, alpha = 1)
     ax.set_yticklabels([None, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10], fontsize=12, alpha = 1)
     ax.patch.set_facecolor('white')

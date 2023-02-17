@@ -22,6 +22,7 @@
   
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    
     <style>
     .container {width: 28rem; text-align: center; margin-top: 0rem;}
 
@@ -37,12 +38,16 @@
 
       #image-container {
         position: fixed;
-        bottom: 40px;
-        right: 40px;
+        bottom: 10px;
+        right: 10px;
+        width: 200px;
+        height: 200px;
+        background: transparent;
       }
       #image-container img {
         width: 150px;
         height: 150px;
+        cursor: pointer;
       }
       #speech-bubble {
         display: none;
@@ -59,7 +64,31 @@
       #image-container:hover #speech-bubble {
         display: block;
       }
-
+      #image-container1 {
+        position: fixed;
+        bottom: 80px;
+        left: 100px;
+      }
+      #image-container1 img {
+        width: 150px;
+        height: 150px;
+      }
+      #speech-bubble1 {
+        display: none;
+        position: absolute;
+        bottom: 150px;
+        top: -300px;
+        background-color: #fff;
+        padding: 10px;
+        border-radius: 10px;
+        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+        display: block;
+        width: 200px;
+      }
+      
+      #image-container1:hover #speech-bubble1 {
+        display: block;
+      }
     </style>
   </head>
 
@@ -76,7 +105,12 @@
     <div id="speech-bubble">
       <center><h7>스트루프<br> 박사가 만든<br> 스트루프<br> 이론에서<br> 비롯된 게임이야</h7>
     </div>
-
+  </div>
+  <div id="image-container1">
+    <img src="{{ url_for('static', filename = 'img/rainbow.png')}}" alt="Image" style="width: 110px; height: auto;">
+    <div id="speech-bubble1">
+      <p style="text-align:center;"><strong><center>전두엽<br>베르니케 영역<br>🧠<br>단순, 복합<br>반응시간<br>억제/탈억제<br>집행 기술을 통한<br>처리 속도</p>
+    </div>
   </div>
   <div class="container">
     <div style="border: px solid; padding :10px; width: 820px; 

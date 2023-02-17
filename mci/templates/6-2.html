@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        /* page-loading */
+      img {
+          width:10%;
+          height:auto;
+          top: 100;
+          left:0;
+          
+          display: block;
+          opacity: 0.6;
+          background: #e4e4e4;
+          z-index: 99;
+          text-align: center;
+          margin: 0 auto;
+      }
+    
+      /*img > img {
+          position: absolute;
+          top: 36%;
+          left: 45%;
+          z-index: 100; 
+      }
+       img > p {
+            position: absolute;
+            top: 54%;
+            left: 48%;
+            z-index: 101;
+        }*/
+    </style>
+    <!-- <style>
+        /* CSS rules to center-align the image */
+        img {
+           display: block;
+           margin: 0 auto;
+        }
+     </style> -->
+   <title>로딩 중...</title>
+
+</head>
+<center>
+<body onload="showImageAndRedirect()">
+
+    <!-- <div id="loading" style="margin-left: 0px;">
+        <input type="hidden" id ='ss' src="{{ url_for('static', filename = 'img/loading.gif')}}"> -->
+        <!-- <br><img src="{{ url_for('static', filename = 'img/logo2.png')}}" alt="Image" style="width: 105px;"></a> -->
+        <br><br><br><br>
+        <h1>잠시만 기다려주세요 😊</h1>
+        <br><br><br><br>
+
+    </div>
+    <!-- <script src="http://code.jquery.com/jquery-latest.min.js"></script> -->
+    
+    <script>
+        // function to show image and redirect
+        function showImageAndRedirect() {
+                
+
+                   
+           // show the image for 10 seconds
+           setTimeout(function() {
+              // redirect to the next page
+              window.location = "/result";
+           }, 10000); // 10 seconds in milliseconds
+                   // code to display the image
+         var img = document.createElement("img");
+         img.src = "../static/img/loading.gif";
+         document.body.appendChild(img);
+
+        }
+    
+     </script>
+    
+</body>
+</center>
+</html>

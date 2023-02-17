@@ -58,12 +58,14 @@ def predict():
     # results.pandas().xyxy[0]  # 예측 (pandas)
     conf = results.pandas().xyxy[0]
     print(conf)
-   
     # 오답 여부
     OX = []
-    if conf.name[0] == 'rabbit':
-        OX.append(1)
-    else:
+    try:
+        if conf.name[0] == 'rabbit':
+            OX.append(1)
+        else:
+            OX.append(0)
+    except:
         OX.append(0)
     
 

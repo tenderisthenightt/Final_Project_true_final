@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>SoftLand Bootstrap Template - Index</title>
+  <title>MCI</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -46,11 +46,11 @@
 <body>
   <!-- ======= Header ======= -->
   <header id="header" class="fixed-top d-flex align-items-center">
+    <a href="/" style="width: 100px;">
+      <img src="{{ url_for('static', filename = 'img/logo.png')}}" alt="Image" style="width: 125px;">
+    </a>
     <div class="container d-flex justify-content-between align-items-center">
-      <a href="/" style="width: 100px;">
-        <img src="{{ url_for('static', filename = 'img/logo.png')}}" alt="Image" style="width: 125px;">
-      </a>
-      <h1 style="color: white; margin-left: 10px;">MCI</h1>
+      <br><br><br><h1 style="color: white; margin-left: 10px;">MCI</h1>
       </a>
       <nav id="navbar" class="navbar">
         <ul>
@@ -271,6 +271,30 @@
 
                   </div>
                 </div><!-- End testimonial item -->
+                <div class="swiper-slide">
+                  <div class="review text-center">
+                    <p class="stars">
+                      <span class="bi bi-star-fill"></span>
+                      <span class="bi bi-star-fill"></span>
+                      <span class="bi bi-star-fill"></span>
+                      <span class="bi bi-star-fill"></span>
+                      <span class="bi bi-star-fill muted"></span>
+                    </p>
+                    <h3>앞으로도 좋은 서비스 계속해주세용</h3>
+                    <blockquote>
+                      <p>요즘 알콜성 치매인지 계속 깜빡깜빡했는데,<br>재밌기도하고 훈련하는 느낌도 있어서 더 마음에 들어요~ :)</p>
+                    </blockquote>
+                    <p class="review-user">
+                      <img src="{{ url_for('static', filename='images/sujin.jpg') }}" alt="Image"
+                        class="img-fluid rounded-circle mb-3">
+                      <span class="d-block">
+                        <span class="text-black">Sujin Oh</span>, &mdash; 일반인
+                      </span>
+                    </p>
+
+                  </div>
+                </div><!-- End testimonial item -->
+
 
               </div>
               <div class="swiper-pagination"></div>

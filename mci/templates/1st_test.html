@@ -72,6 +72,32 @@
       #image-container:hover #speech-bubble {
         display: block;
       }
+
+      #image-container1 {
+        position: fixed;
+        bottom: 80px;
+        left: 100px;
+      }
+      #image-container1 img {
+        width: 150px;
+        height: 150px;
+      }
+      #speech-bubble1 {
+        display: none;
+        position: absolute;
+        bottom: 120px;
+        top: -300px;
+        background-color: #fff;
+        padding: 10px;
+        border-radius: 10px;
+        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+        display: block;
+        width: 200px;
+      }
+      
+      #image-container1:hover #speech-bubble1 {
+        display: block;
+      }
   </style>
 
 </head>
@@ -81,12 +107,18 @@
     <br><img src="{{ url_for('static', filename = 'img/logo2.png')}}" alt="Image" style="width: 105px;"></a>
   <h1 align="center">  비슷한 그림 그리기 </h1>
   <h6>
-    <p style="text-align:center;">10초동안 그림을 잘 기억한 후 최대한 비슷하게 그려주세요<br>다 그린 후 제출 버튼을 누르고 다음으로 넘어가세요
+    <p style="text-align:center;">5초동안 그림을 잘 기억한 후 최대한 비슷하게 그려주세요<br>다 그린 후 제출 버튼을 누르고 다음으로 넘어가세요
   </h6>
   <div id="image-container">
     <img src="{{ url_for('static', filename = 'face/dongwhan.png')}}" alt="Image">
     <div id="speech-bubble">
       <center><p>잘 그리지 않아도 돼!<br> 특징적인 부분을<br> 그려봐</p>
+    </div>
+  </div>
+  <div id="image-container1">
+    <img src="{{ url_for('static', filename = 'img/drawing.png')}}" alt="Image" style="width: 110px; height: auto;">
+    <div id="speech-bubble1">
+      <p style="text-align:center;"><strong><center><p>전두엽<br>측두엽<br>후두엽<br>🧠<br>시각적 학습<br>기하학적 모양에 대한 기억력<br>즉각/지연 상기<br>소근육 조절</p>
     </div>
   </div>
   <div class='container'>
@@ -146,27 +178,27 @@
 
     setTimeout(function () {
       document.getElementById("image").style.display = "none";
-    }, 2000);
+    }, 5000);
 
     setTimeout(function () {
       document.getElementById("jsCanvas").style.display = "block";
-    }, 2000);
+    }, 5000);
 
     setTimeout(function () {
       document.getElementById("jsMode").style.display = "none";
-    }, 2000);
+    }, 5000);
 
     setTimeout(function () {
       document.getElementById("move-btn").style.display = "flex";
-    }, 2000);
+    }, 5000);
 
     setTimeout(function () {
       document.getElementById("jsReset").style.display = "flex";
-    }, 2000);
+    }, 5000);
 
     setTimeout(function () {
       document.getElementById("jsSave").style.display = "none";
-    }, 2000);
+    }, 5000);
 
     document.getElementById("move-btn").addEventListener("click", function () {
       let canvas = document.getElementById("jsCanvas");
