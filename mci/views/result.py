@@ -32,20 +32,23 @@ def result():
         return redirect(url_for('main.intro'), msg='문제를 전부 풀어주세요')
 
     #1 sim_point
-    if sql[0][3] == 0:
+    try:
+        if sql[0][3] == 0:
+            sim_point = 0
+        else : sim_point = 10
+    except:
         sim_point = 0
-    else : sim_point = 10
     
-    
-    # 2 stroop_point
-    ##방법1. for 사용해서 점수 더하기
-    stroop_point = 0
-    index = range(2,12) # 아직 문제를 8개 할지 10개 할지 안 정해서 인덱스로 갖고옴. 나중에 10로 확정되면  for i in range(2,12) 로 바꾸면 될듯
-    for i in index:
-        if sql[1][i]== 1 :
-            stroop_point += 1
-        elif sql[1][i]== 0:
-            stroop_point +=0
+    try:
+        # 2 stroop_point
+        ##방법1. for 사용해서 점수 더하기
+        stroop_point = 0
+        index = range(2,12) # 아직 문제를 8개 할지 10개 할지 안 정해서 인덱스로 갖고옴. 나중에 10로 확정되면  for i in range(2,12) 로 바꾸면 될듯
+        for i in index:
+            if sql[1][i]== 1 :
+                stroop_point += 1
+            elif sql[1][i]== 0:
+                stroop_point +=0
 
     ## 방법2. 모든 컬럼을 하나의 list 에 담기 - stroop_point = len(list()) 
     # index = range(2,10)
