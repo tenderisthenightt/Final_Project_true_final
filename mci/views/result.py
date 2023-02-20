@@ -63,27 +63,31 @@ def result():
     #     stroop_point = 10
 
    #3 write_point
-    write_point =str(sql[2][2])[2]# 점수를 str 으로 바꿔서 슬라이싱 해서 갖고 오기
-    write_point = int(write_point)
-    if write_point == '0':
-        if str(sql[2][2])[0] == '0':
-            write_point = 0
-        elif str(sql[2][2])[0] == '1':
-            write_point = 10
-
+    try:
+        write_point =str(sql[2][2])[2]# 점수를 str 으로 바꿔서 슬라이싱 해서 갖고 오기
+        write_point = int(write_point)
+        if write_point == '0':
+            if str(sql[2][2])[0] == '0':
+                write_point = 0
+            elif str(sql[2][2])[0] == '1':
+                write_point = 10
+    except:
+        write_point=0
     # 4 wrong_point
     # 방법 1 for 사용해서 점수 더하기
-    wrong_point = 0
-    if sql[3][1]== 1: wrong_point +=3
-    else : wrong_point +=0
-    if sql[3][2]== 1: wrong_point +=3
-    else : wrong_point +=0
-    if sql[3][3]== 1: wrong_point +=3
-    else : wrong_point +=0
-    #이렇게 3개를 하게되면 마지막 1점을 어떻게 더 해줄지 고민해야함 if wrong_point == 9 : worng_point = 10 같을걸 생각해보기
-    if wrong_point == 9:
-        wrong_point = 10    
-
+    try:
+        wrong_point = 0
+        if sql[3][1]== 1: wrong_point +=3
+        else : wrong_point +=0
+        if sql[3][2]== 1: wrong_point +=3
+        else : wrong_point +=0
+        if sql[3][3]== 1: wrong_point +=3
+        else : wrong_point +=0
+        #이렇게 3개를 하게되면 마지막 1점을 어떻게 더 해줄지 고민해야함 if wrong_point == 9 : worng_point = 10 같을걸 생각해보기
+        if wrong_point == 9:
+            wrong_point = 10    
+    except:
+        write_point=0
     # 방법 2 정답을 하나의 리스트에 담아서 정답의 갯수로 점수주기
     # index = range(1,4)
     # wrong_list =[]
@@ -95,13 +99,18 @@ def result():
     #     wrong_point = 10
         
     #5 remember_point
-    remember_point = sql[4][3]
+    try:
+        remember_point = sql[4][3]
+    except:
+        remember_point = 0
     
     
     #6 stt_point
-    if sql[5][5]==1 : stt_point = 10 
-    else:stt_point = 0
-    
+    try:
+        if sql[5][5]==1 : stt_point = 10 
+        else:stt_point = 0
+    except:
+        stt_point = 0    
     
     # 대시보드 그래프
     plt.style.use('ggplot')
