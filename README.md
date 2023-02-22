@@ -1,6 +1,5 @@
-# Final_Project_true_final <br>
-한국품질재단<br>
-K-Digital 빅데이터 전문가 양성과정 최종 프로젝트 <br>
+# 한국품질재단 빅데이터 분석가 교육 과정 3차반<br> FINAL PROJECT 대상 수상<br>
+
 [데이터에듀] 경도인지저하검사 team 인절미 <br>
 
 ![003](https://user-images.githubusercontent.com/120777172/220516785-20b1811c-d355-402a-b4ce-57596c0a79bf.jpg)
