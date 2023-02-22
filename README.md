@@ -56,8 +56,6 @@ K-Digital 빅데이터 전문가 양성과정 최종 프로젝트 <br>
 ![089](https://user-images.githubusercontent.com/120777172/220518290-9a5525e1-69e3-4c41-a087-94e3cb11f588.jpg)
 ![090](https://user-images.githubusercontent.com/120777172/220518292-5ea63169-2fb4-40e8-afc9-b89fb47d2f00.jpg)
 ![091](https://user-images.githubusercontent.com/120777172/220518294-697e006c-5664-41f8-97d9-0e8098b3bf30.jpg)
-![093](https://user-images.githubusercontent.com/120777172/220518389-823cde7e-ac02-4386-9771-82d95c400563.jpg)
-![094](https://user-images.githubusercontent.com/120777172/220518393-439f14ec-3b95-4a0c-8a2f-cfce3e75453c.jpg)
 ![095](https://user-images.githubusercontent.com/120777172/220518394-56365aca-6b37-4e5f-8def-eb79544dea28.jpg)
 ![KakaoTalk_20230222_125753424](https://user-images.githubusercontent.com/120777172/220518312-ae253d06-529e-4889-b20d-0271c0b1c4a1.png)
 ![097](https://user-images.githubusercontent.com/120777172/220518331-ea55a11e-0fd1-4993-9fa0-1198e995dc57.jpg)
