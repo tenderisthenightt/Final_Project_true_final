@@ -1,6 +1,6 @@
 # Final_Project_true_final <br>
 한국품질재단 K-Digital 빅데이터 전문가 양성과정 파이널 프로젝트 <br>
-(데이터에듀) 경도인지저하검사 team 인절미 <br>
+[데이터에듀] 경도인지저하검사 team 인절미 <br>
 
 ![003](https://user-images.githubusercontent.com/120777172/220516785-20b1811c-d355-402a-b4ce-57596c0a79bf.jpg)
 ![004](https://user-images.githubusercontent.com/120777172/220516817-0f56c8c8-5ee9-44f6-85a0-c27565f25f0b.jpg)
@@ -33,14 +33,19 @@
 ![029](https://user-images.githubusercontent.com/120777172/220516953-38b5856d-aab6-4f00-9ac7-e4c885b1a221.jpg)
 ![030](https://user-images.githubusercontent.com/120777172/220516955-55790e25-0487-4c50-82c1-b6dcee2d3dd7.jpg)
 ![031](https://user-images.githubusercontent.com/120777172/220516957-c68d3a2d-5ab8-42cc-93ca-580c9446bdc5.jpg)
-
-
 ![032](https://user-images.githubusercontent.com/120777172/220516989-4e2d2154-3cef-454b-ba09-c735cd274a2d.jpg)
+
+.<br>
+.<br>
+.<br>
 - 각 게임에 관한 설명은 
     - test : **[Repositories📘](https://github.com/tenderisthenightt/Final_test.git)**
-   에 나눠서 기술하였다
-   
- ![082](https://user-images.githubusercontent.com/120777172/220518266-1392eb75-b74f-4bab-ba3a-e44384cf6e08.jpg)
+에 나눠서 기술하였다
+<br>
+<Br>
+<br>
+
+![082](https://user-images.githubusercontent.com/120777172/220518266-1392eb75-b74f-4bab-ba3a-e44384cf6e08.jpg)
 ![083](https://user-images.githubusercontent.com/120777172/220518272-07256681-7057-4ac4-8706-37bf87c56237.jpg)
 ![084](https://user-images.githubusercontent.com/120777172/220518274-438e7fc9-15bd-43f5-838c-dfcfa8a3ee5b.jpg)
 ![085](https://user-images.githubusercontent.com/120777172/220518276-241c1de3-33a2-45ab-80f4-81d957fa27d2.jpg)
