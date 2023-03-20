@@ -13,7 +13,8 @@
 - Roboflow 를 통한 이미지 라벨링 및 증식
 - YOLOv5 모델에 전처리 된 이미지를 학습시켜 정확도 상승
 <br>
-[데이터에듀] 경도인지저하검사 team 인절미 <br>
+[데이터에듀] 경도인지저하검사 team 인절미 
+<br>
 
 ![003](https://user-images.githubusercontent.com/120777172/220516785-20b1811c-d355-402a-b4ce-57596c0a79bf.jpg)
 ![004](https://user-images.githubusercontent.com/120777172/220516817-0f56c8c8-5ee9-44f6-85a0-c27565f25f0b.jpg)
