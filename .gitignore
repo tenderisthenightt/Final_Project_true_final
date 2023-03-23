@@ -8,3 +8,4 @@ drawing/pygame/*.png
 drawing/sim/*.png
 drawing/txt_to_img/*.png
 log
+README.md
